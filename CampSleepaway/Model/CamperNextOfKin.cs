@@ -8,6 +8,7 @@ namespace CampSleepaway.Model
 {
     public class CamperNextOfKin
     {
+        public int CamperNextOfKinId { get; set; }
         public int CabinId { get; set; }
         public int CamperId { get; set; }
     }
