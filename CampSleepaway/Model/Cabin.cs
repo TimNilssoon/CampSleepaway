@@ -12,5 +12,7 @@ namespace CampSleepaway.Model
     {
         public int CabinId { get; set; }
         public string Name { get; set; }
+        public List<Camper> Campers { get; set; }
+        public Councelor Councelor { get; set; }
     }
 }
