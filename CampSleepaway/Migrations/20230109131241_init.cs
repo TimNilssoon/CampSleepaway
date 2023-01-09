@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CampSleepaway.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,12 +17,12 @@ namespace CampSleepaway.Migrations
                 {
                     CouncelorId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MyProperty = table.Column<int>(type: "int", nullable: false),
+                    FavoriteNumber = table.Column<int>(type: "int", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,7 +40,7 @@ namespace CampSleepaway.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,7 +54,7 @@ namespace CampSleepaway.Migrations
                     CabinId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CouncelorId = table.Column<int>(type: "int", nullable: false)
+                    CouncelorId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -63,8 +63,7 @@ namespace CampSleepaway.Migrations
                         name: "FK_Cabin_Councelor_CouncelorId",
                         column: x => x.CouncelorId,
                         principalTable: "Councelor",
-                        principalColumn: "CouncelorId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "CouncelorId");
                 });
 
             migrationBuilder.CreateTable(
@@ -79,7 +78,7 @@ namespace CampSleepaway.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -119,7 +118,8 @@ namespace CampSleepaway.Migrations
                 name: "IX_Cabin_CouncelorId",
                 table: "Cabin",
                 column: "CouncelorId",
-                unique: true);
+                unique: true,
+                filter: "[CouncelorId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Camper_CabinId",

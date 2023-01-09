@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampSleepaway.Migrations
 {
     [DbContext(typeof(CampSleepawayContext))]
-    [Migration("20230109102258_Init")]
-    partial class Init
+    [Migration("20230109131241_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace CampSleepaway.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CabinId"));
 
-                    b.Property<int>("CouncelorId")
+                    b.Property<int?>("CouncelorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -43,7 +43,8 @@ namespace CampSleepaway.Migrations
                     b.HasKey("CabinId");
 
                     b.HasIndex("CouncelorId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[CouncelorId] IS NOT NULL");
 
                     b.ToTable("Cabin");
                 });
@@ -62,7 +63,7 @@ namespace CampSleepaway.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
@@ -110,8 +111,11 @@ namespace CampSleepaway.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CouncelorId"));
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("FavoriteNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -120,9 +124,6 @@ namespace CampSleepaway.Migrations
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MyProperty")
-                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -144,7 +145,7 @@ namespace CampSleepaway.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NextOfKinId"));
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
@@ -174,9 +175,7 @@ namespace CampSleepaway.Migrations
                 {
                     b.HasOne("CampSleepaway.Model.Councelor", "Councelor")
                         .WithOne("Cabin")
-                        .HasForeignKey("CampSleepaway.Model.Cabin", "CouncelorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CampSleepaway.Model.Cabin", "CouncelorId");
 
                     b.Navigation("Councelor");
                 });
