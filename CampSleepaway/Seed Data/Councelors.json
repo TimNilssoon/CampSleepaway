@@ -1,0 +1,42 @@
+[
+	{
+		"FirstName": "Xena",
+		"LastName": "Mercer",
+		"PhoneNumber": "1-427-736-1135",
+		"StartDate": "22-08-04",
+		"EndDate": "24-09-16",
+		"FavoriteNumber": 2
+	},
+	{
+		"FirstName": "Rose",
+		"LastName": "Jacobs",
+		"PhoneNumber": "1-231-537-8582",
+		"StartDate": "22-05-03",
+		"EndDate": "25-03-16",
+		"FavoriteNumber": 2
+	},
+	{
+		"FirstName": "Simone",
+		"LastName": "Hickman",
+		"PhoneNumber": "1-543-681-5412",
+		"StartDate": "23-05-05",
+		"EndDate": "24-09-17",
+		"FavoriteNumber": 8
+	},
+	{
+		"FirstName": "Rogan",
+		"LastName": "Sims",
+		"PhoneNumber": "1-951-417-4113",
+		"StartDate": "22-02-21",
+		"EndDate": "25-04-28",
+		"FavoriteNumber": 6
+	},
+	{
+		"FirstName": "Carla",
+		"LastName": "Rogers",
+		"PhoneNumber": "1-748-762-7256",
+		"StartDate": "23-03-28",
+		"EndDate": "25-06-14",
+		"FavoriteNumber": 9
+	}
+]

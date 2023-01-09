@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CampSleepaway.Model
 {
@@ -12,6 +7,6 @@ namespace CampSleepaway.Model
     {
         public int CouncelorId { get; set; }
         public Cabin Cabin { get; set; }
-        public int MyProperty { get; set; }
+        public int FavoriteNumber { get; set; }
     }
 }
