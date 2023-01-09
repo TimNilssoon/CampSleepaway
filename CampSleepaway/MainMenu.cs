@@ -15,7 +15,7 @@
 
                 int selection = HelperMethods.ShowMenu("What would you like to do?", new string[]
                 {
-                    ""
+                    "Manage Camp"
                 });
             }
             throw new NotImplementedException();

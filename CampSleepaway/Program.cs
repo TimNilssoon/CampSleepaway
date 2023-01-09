@@ -15,6 +15,7 @@ namespace CampSleepaway
             if (dbCamper is null)
             {
                 SeedDb.SeedCampers();
+                SeedDb.SeedNextOfKin();
             }
 
             if (dbCouncelor is null)
@@ -27,9 +28,8 @@ namespace CampSleepaway
             {
                 SeedDb.SeedCabins();
             }
-            MainMenu.Menu();
 
-            Console.ReadKey();
+            MainMenu.Menu();
         }
     }
 }
