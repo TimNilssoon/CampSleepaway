@@ -62,7 +62,9 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
-appSettings.Local.json
+
+#Ignore appSettings
+appSettings.json
 
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
