@@ -12,16 +12,21 @@ namespace CampSleepaway.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Cabin",
+                name: "Councelor",
                 columns: table => new
                 {
-                    CabinId = table.Column<int>(type: "int", nullable: false)
+                    CouncelorId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    MyProperty = table.Column<int>(type: "int", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cabin", x => x.CabinId);
+                    table.PrimaryKey("PK_Councelor", x => x.CouncelorId);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,13 +48,33 @@ namespace CampSleepaway.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Cabin",
+                columns: table => new
+                {
+                    CabinId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CouncelorId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cabin", x => x.CabinId);
+                    table.ForeignKey(
+                        name: "FK_Cabin_Councelor_CouncelorId",
+                        column: x => x.CouncelorId,
+                        principalTable: "Councelor",
+                        principalColumn: "CouncelorId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Camper",
                 columns: table => new
                 {
                     CamperId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CabinId = table.Column<int>(type: "int", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CabinId = table.Column<int>(type: "int", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -63,33 +88,7 @@ namespace CampSleepaway.Migrations
                         name: "FK_Camper_Cabin_CabinId",
                         column: x => x.CabinId,
                         principalTable: "Cabin",
-                        principalColumn: "CabinId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Councelor",
-                columns: table => new
-                {
-                    CouncelorId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CabinId = table.Column<int>(type: "int", nullable: false),
-                    MyProperty = table.Column<int>(type: "int", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Councelor", x => x.CouncelorId);
-                    table.ForeignKey(
-                        name: "FK_Councelor_Cabin_CabinId",
-                        column: x => x.CabinId,
-                        principalTable: "Cabin",
-                        principalColumn: "CabinId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "CabinId");
                 });
 
             migrationBuilder.CreateTable(
@@ -117,6 +116,12 @@ namespace CampSleepaway.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cabin_CouncelorId",
+                table: "Cabin",
+                column: "CouncelorId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Camper_CabinId",
                 table: "Camper",
                 column: "CabinId");
@@ -125,12 +130,6 @@ namespace CampSleepaway.Migrations
                 name: "IX_CamperNextOfKin_NextOfKinId",
                 table: "CamperNextOfKin",
                 column: "NextOfKinId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Councelor_CabinId",
-                table: "Councelor",
-                column: "CabinId",
-                unique: true);
         }
 
         /// <inheritdoc />
@@ -140,9 +139,6 @@ namespace CampSleepaway.Migrations
                 name: "CamperNextOfKin");
 
             migrationBuilder.DropTable(
-                name: "Councelor");
-
-            migrationBuilder.DropTable(
                 name: "Camper");
 
             migrationBuilder.DropTable(
@@ -150,6 +146,9 @@ namespace CampSleepaway.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cabin");
+
+            migrationBuilder.DropTable(
+                name: "Councelor");
         }
     }
 }

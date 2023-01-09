@@ -11,7 +11,7 @@ namespace CampSleepaway.Model
     public class Councelor : Person
     {
         public int CouncelorId { get; set; }
-        public int CabinId { get; set; }
+        public Cabin Cabin { get; set; }
         public int MyProperty { get; set; }
     }
 }

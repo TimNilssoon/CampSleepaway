@@ -30,11 +30,17 @@ namespace CampSleepaway.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CabinId"));
 
+                    b.Property<int>("CouncelorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CabinId");
+
+                    b.HasIndex("CouncelorId")
+                        .IsUnique();
 
                     b.ToTable("Cabin");
                 });
@@ -47,7 +53,7 @@ namespace CampSleepaway.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CamperId"));
 
-                    b.Property<int>("CabinId")
+                    b.Property<int?>("CabinId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -101,9 +107,6 @@ namespace CampSleepaway.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CouncelorId"));
 
-                    b.Property<int>("CabinId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
@@ -126,9 +129,6 @@ namespace CampSleepaway.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("CouncelorId");
-
-                    b.HasIndex("CabinId")
-                        .IsUnique();
 
                     b.ToTable("Councelor");
                 });
@@ -167,13 +167,22 @@ namespace CampSleepaway.Migrations
                     b.ToTable("NextOfKin");
                 });
 
+            modelBuilder.Entity("CampSleepaway.Model.Cabin", b =>
+                {
+                    b.HasOne("CampSleepaway.Model.Councelor", "Councelor")
+                        .WithOne("Cabin")
+                        .HasForeignKey("CampSleepaway.Model.Cabin", "CouncelorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Councelor");
+                });
+
             modelBuilder.Entity("CampSleepaway.Model.Camper", b =>
                 {
                     b.HasOne("CampSleepaway.Model.Cabin", null)
                         .WithMany("Campers")
-                        .HasForeignKey("CabinId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CabinId");
                 });
 
             modelBuilder.Entity("CampSleepaway.Model.CamperNextOfKin", b =>
@@ -195,20 +204,14 @@ namespace CampSleepaway.Migrations
                     b.Navigation("NextOfKin");
                 });
 
-            modelBuilder.Entity("CampSleepaway.Model.Councelor", b =>
-                {
-                    b.HasOne("CampSleepaway.Model.Cabin", null)
-                        .WithOne("Councelor")
-                        .HasForeignKey("CampSleepaway.Model.Councelor", "CabinId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("CampSleepaway.Model.Cabin", b =>
                 {
                     b.Navigation("Campers");
+                });
 
-                    b.Navigation("Councelor")
+            modelBuilder.Entity("CampSleepaway.Model.Councelor", b =>
+                {
+                    b.Navigation("Cabin")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
