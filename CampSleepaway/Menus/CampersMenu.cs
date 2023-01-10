@@ -92,14 +92,20 @@ namespace CampSleepaway.Menus
 
         private static void UpdateCamp(Camper camper)
         {
+            Console.Clear();
+
             List<Cabin> cabins = GetCabins();
+            List<string> cabinNames = cabins.Select(c => c.Name).ToList();
 
-            List<string> cabinNames = new();
+            int selection = HelperMethods.ShowMenu("Select new cabin", cabinNames);
 
-            foreach (var cabin in cabins)
-            {
+            using CampSleepawayContext context = new();
+            var camperDb = context.Campers.Single(c => c.CamperId == camper.CamperId);
 
-            }
+            camperDb.CabinId = cabins[selection].CabinId;
+            context.SaveChanges();
+
+            HelperMethods.ShowMessage("Updated camp!");
         }
 
         private static void UpdateStartDate(Camper camper)
@@ -107,9 +113,9 @@ namespace CampSleepaway.Menus
             DateTime newDate = HelperMethods.GetDateTime("Enter a new start time:");
 
             using CampSleepawayContext context = new();
-            var camperDb = context.Campers.SingleOrDefault(c => c.CamperId == camper.CamperId);
+            var camperDb = context.Campers.Single(c => c.CamperId == camper.CamperId);
 
-            camperDb!.StartDate = newDate;
+            camperDb.StartDate = newDate;
             context.SaveChanges();
 
             HelperMethods.ShowMessage("Updated start date!");
