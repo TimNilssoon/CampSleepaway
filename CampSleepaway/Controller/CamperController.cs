@@ -11,6 +11,7 @@ namespace CampSleepaway.Controller
 {
     public class CamperController
     {
+
         public static List<Camper> GetCampers()
         {
             using CampSleepawayContext context = new();
@@ -19,12 +20,20 @@ namespace CampSleepaway.Controller
 
             return campers;
         }
+
+        public static Camper GetCamperById(int id)
+        {
+            using CampSleepawayContext context = new();
+
+            return context.Campers.Single(c => c.CamperId == id);
+        }
+
         public static void UpdateCamperStartDate(int id, DateTime newStartTime)
         {
             using CampSleepawayContext context = new();
-            var camperDb = context.Campers.SingleOrDefault(c => c.CamperId == id);
+            var camperDb = context.Campers.Single(c => c.CamperId == id);
 
-            camperDb!.StartDate = newStartTime;
+            camperDb.StartDate = newStartTime;
             context.SaveChanges();
 
             HelperMethods.ShowMessage("Updated start date!");
@@ -33,9 +42,9 @@ namespace CampSleepaway.Controller
         public static void UpdateCamperEndDate(int camperId, DateTime newEndDate)
         {
             using CampSleepawayContext context = new();
-            var camperDb = context.Campers.SingleOrDefault(c => c.CamperId == camperId);
+            var camperDb = context.Campers.Single(c => c.CamperId == camperId);
 
-            camperDb!.EndDate = newEndDate;
+            camperDb.EndDate = newEndDate;
             context.SaveChanges();
 
             HelperMethods.ShowMessage("Updated end date!");
@@ -44,9 +53,9 @@ namespace CampSleepaway.Controller
         public static void UpdatePhoneNumber(int camperId, string newPhoneNumber)
         {
             using CampSleepawayContext context = new();
-            var camperDb = context.Campers.SingleOrDefault(c => c.CamperId == camperId);
+            var camperDb = context.Campers.Single(c => c.CamperId == camperId);
 
-            camperDb!.PhoneNumber = newPhoneNumber;
+            camperDb.PhoneNumber = newPhoneNumber;
 
             context.SaveChanges();
 
@@ -69,6 +78,25 @@ namespace CampSleepaway.Controller
             context.SaveChanges();
 
             HelperMethods.ShowMessage("Updated camp!");
+        }
+
+        public static void DeleteCamper(int camperId)
+        {
+            bool delete = HelperMethods.GetBool("Are you sure? (true/false)");
+            if (delete)
+            {
+                using CampSleepawayContext context = new();
+                var camperDb = context.Campers.Single(c => c.CamperId == camperId);
+
+                context.Campers.Remove(camperDb);
+                context.SaveChanges();
+
+                HelperMethods.ShowMessage($"Camper, {camperDb.GetFullName()}, was deleted!");
+            }
+            else
+            {
+                HelperMethods.ShowMessage("Camper was not deleted...");
+            }
         }
     }
 }

@@ -121,5 +121,22 @@ namespace CampSleepaway
 
             return result;
         }
+
+        public static bool GetBool(string prompt)
+        {
+            Console.Clear();
+            Console.Write($"{prompt} ");
+
+            bool result;
+            while (!bool.TryParse(Console.ReadLine(), out result))
+            {
+                Console.Clear();
+                Console.WriteLine("Invalid input, try again...");
+
+                Console.Write($"{prompt} ");
+            }
+
+            return result;
+        }
     }
 }
