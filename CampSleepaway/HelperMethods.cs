@@ -86,5 +86,21 @@ namespace CampSleepaway
             Console.CursorVisible = true;
             return selected;
         }
+
+        public static string GetString(string prompt)
+        {
+            Console.Clear();
+            Console.Write($"{prompt} ");
+
+            return Console.ReadLine();
+        }
+
+        public static void ShowMessage(string message)
+        {
+            Console.Clear();
+            Console.WriteLine(message);
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
     }
 }

@@ -74,14 +74,16 @@ namespace CampSleepaway.Menus
 
         private static void ModifyPhoneNumber(Camper camper)
         {
-            string newnumber = "";
+            string newPhoneNumber = HelperMethods.GetString("Enter new phone number:");
             using CampSleepawayContext context = new();
 
             var camperDb = context.Campers.SingleOrDefault(c => c.CamperId == camper.CamperId);
 
-            camperDb.PhoneNumber = newnumber;
+            camperDb!.PhoneNumber = newPhoneNumber;
 
             context.SaveChanges();
+
+            HelperMethods.ShowMessage("Updated phone number!");
         }
     }
 }
