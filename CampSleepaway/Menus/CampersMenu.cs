@@ -110,19 +110,6 @@ namespace CampSleepaway.Menus
             HelperMethods.ShowMessage("Updated camp!");
         }
 
-        private static void UpdateStartDate(Camper camper)
-        {
-            DateTime newDate = HelperMethods.GetDateTime("Enter a new start time:");
-
-            using CampSleepawayContext context = new();
-            var camperDb = context.Campers.SingleOrDefault(c => c.CamperId == camper.CamperId);
-
-            camperDb!.StartDate = newDate;
-            context.SaveChanges();
-
-            HelperMethods.ShowMessage("Updated start date!");
-        }
-
         private static void UpdateEndDate(Camper camper)
         {
             DateTime newDate = HelperMethods.GetDateTime("Enter a new end time:");
