@@ -1,4 +1,4 @@
-﻿namespace CampSleepaway
+﻿namespace CampSleepaway.Menus
 {
     public class MainMenu
     {
@@ -15,8 +15,19 @@
 
                 int selection = HelperMethods.ShowMenu("What would you like to do?", new string[]
                 {
-                    "Manage Camp"
+                    "Manage Campers",
+                    "Manage Councelors",
+                    "Manage Camps"
                 });
+
+                switch (selection)
+                {
+                    case 0:
+                        CampersMenu.Menu();
+                        break;
+                    default:
+                        break;
+                }
             }
             throw new NotImplementedException();
         }

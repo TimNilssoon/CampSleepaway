@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampSleepaway.Migrations
 {
     [DbContext(typeof(CampSleepawayContext))]
-    [Migration("20230109131241_init")]
+    [Migration("20230110092925_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -182,9 +182,11 @@ namespace CampSleepaway.Migrations
 
             modelBuilder.Entity("CampSleepaway.Model.Camper", b =>
                 {
-                    b.HasOne("CampSleepaway.Model.Cabin", null)
+                    b.HasOne("CampSleepaway.Model.Cabin", "Cabin")
                         .WithMany("Campers")
                         .HasForeignKey("CabinId");
+
+                    b.Navigation("Cabin");
                 });
 
             modelBuilder.Entity("CampSleepaway.Model.CamperNextOfKin", b =>

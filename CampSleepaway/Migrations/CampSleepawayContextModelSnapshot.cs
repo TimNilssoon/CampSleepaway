@@ -179,9 +179,11 @@ namespace CampSleepaway.Migrations
 
             modelBuilder.Entity("CampSleepaway.Model.Camper", b =>
                 {
-                    b.HasOne("CampSleepaway.Model.Cabin", null)
+                    b.HasOne("CampSleepaway.Model.Cabin", "Cabin")
                         .WithMany("Campers")
                         .HasForeignKey("CabinId");
+
+                    b.Navigation("Cabin");
                 });
 
             modelBuilder.Entity("CampSleepaway.Model.CamperNextOfKin", b =>
