@@ -1,4 +1,5 @@
-﻿using CampSleepaway.Data;
+﻿using CampSleepaway.Controller;
+using CampSleepaway.Data;
 using CampSleepaway.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -77,7 +78,8 @@ namespace CampSleepaway.Menus
                     UpdatePhoneNumber(camper);
                     break;
                 case 1:
-                    UpdateStartDate(camper);
+                    var newDate = PersonController.ProccessStartDate();
+                    CamperController.UpdateCamperStartDate(camper.CamperId, newDate);
                     break;
                 case 2:
                     UpdateEndDate(camper);
@@ -113,9 +115,9 @@ namespace CampSleepaway.Menus
             DateTime newDate = HelperMethods.GetDateTime("Enter a new start time:");
 
             using CampSleepawayContext context = new();
-            var camperDb = context.Campers.Single(c => c.CamperId == camper.CamperId);
+            var camperDb = context.Campers.SingleOrDefault(c => c.CamperId == camper.CamperId);
 
-            camperDb.StartDate = newDate;
+            camperDb!.StartDate = newDate;
             context.SaveChanges();
 
             HelperMethods.ShowMessage("Updated start date!");

@@ -32,7 +32,7 @@ namespace CampSleepaway.Menus
                 options.Add(councelor.GetFullName());
             }
 
-            int selection = HelperMethods.ShowMenu("Which camper would you like to manage?", options);
+            int selection = HelperMethods.ShowMenu("Which Councelor would you like to manage?", options);
 
             ManageCouncelorMenu(councelors[selection]);
         }
@@ -58,8 +58,8 @@ namespace CampSleepaway.Menus
                 "Modify Phone Number",
                 "Modify Start Date",
                 "Modify End Date",
-                "Move Camper to another Camp",
-                "Delete Camper"
+                "Move Councelor to another Camp",
+                "Delete Councelor"
             });
 
             switch (selection)
@@ -70,11 +70,6 @@ namespace CampSleepaway.Menus
                 default:
                     break;
             }
-        }
-
-        private static void ModifyPhoneNumber(Councelor councelor)
-        {
-            throw new NotImplementedException();
         }
     }
 }
