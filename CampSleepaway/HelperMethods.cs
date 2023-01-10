@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -103,14 +104,14 @@ namespace CampSleepaway
             Console.ReadKey();
         }
 
-        public static DateOnly GetDateOnly(string prompt)
+        public static DateTime GetDateTime(string prompt)
         {
             Console.Clear();
             Console.Write($"{prompt} ");
 
-            DateOnly result;
+            DateTime result;
 
-            while (!DateOnly.TryParseExact(Console.ReadLine(), "yyyy-MM-dd", out result))
+            while (!DateTime.TryParse(Console.ReadLine(), out result))
             {
                 Console.Clear();
                 Console.WriteLine("Invalid input, try again...");

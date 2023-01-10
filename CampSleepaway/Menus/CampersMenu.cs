@@ -20,6 +20,15 @@ namespace CampSleepaway.Menus
             return campers;
         }
 
+        private static List<Cabin> GetCabins()
+        {
+            using CampSleepawayContext context = new();
+
+            List<Cabin> cabins = context.Cabins.AsSplitQuery().ToList();
+
+            return cabins;
+        }
+
         public static void Menu()
         {
             Console.Clear();
@@ -55,9 +64,9 @@ namespace CampSleepaway.Menus
 
             int selection = HelperMethods.ShowMenu(title, new[]
             {
-                "Modify Phone Number",
-                "Modify Start Date",
-                "Modify End Date",
+                "Update Phone Number",
+                "Update Start Date",
+                "Update End Date",
                 "Move Camper to another Camp",
                 "Delete Camper"
             });
@@ -65,26 +74,65 @@ namespace CampSleepaway.Menus
             switch (selection)
             {
                 case 0:
-                    ModifyPhoneNumber(camper);
+                    UpdatePhoneNumber(camper);
                     break;
                 case 1:
-                    ModifyStartDate(camper);
+                    UpdateStartDate(camper);
+                    break;
+                case 2:
+                    UpdateEndDate(camper);
+                    break;
+                case 3:
+                    UpdateCamp(camper);
                     break;
                 default:
                     break;
             }
         }
 
-        private static void ModifyStartDate(Camper camper)
+        private static void UpdateCamp(Camper camper)
         {
-            throw new NotImplementedException();
+            List<Cabin> cabins = GetCabins();
+
+            List<string> cabinNames = new();
+
+            foreach (var cabin in cabins)
+            {
+
+            }
         }
 
-        private static void ModifyPhoneNumber(Camper camper)
+        private static void UpdateStartDate(Camper camper)
         {
-            string newPhoneNumber = HelperMethods.GetString("Enter new phone number:");
-            using CampSleepawayContext context = new();
+            DateTime newDate = HelperMethods.GetDateTime("Enter a new start time:");
 
+            using CampSleepawayContext context = new();
+            var camperDb = context.Campers.SingleOrDefault(c => c.CamperId == camper.CamperId);
+
+            camperDb!.StartDate = newDate;
+            context.SaveChanges();
+
+            HelperMethods.ShowMessage("Updated start date!");
+        }
+
+        private static void UpdateEndDate(Camper camper)
+        {
+            DateTime newDate = HelperMethods.GetDateTime("Enter a new end time:");
+
+            using CampSleepawayContext context = new();
+            var camperDb = context.Campers.SingleOrDefault(c => c.CamperId == camper.CamperId);
+
+            camperDb!.EndDate = newDate;
+            context.SaveChanges();
+
+            HelperMethods.ShowMessage("Updated end date!");
+        }
+
+        private static void UpdatePhoneNumber(Camper camper)
+        {
+            string newPhoneNumber = HelperMethods.GetString("Enter new a phone number:");
+
+            using CampSleepawayContext context = new();
             var camperDb = context.Campers.SingleOrDefault(c => c.CamperId == camper.CamperId);
 
             camperDb!.PhoneNumber = newPhoneNumber;
