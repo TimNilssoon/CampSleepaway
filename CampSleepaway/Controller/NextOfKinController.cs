@@ -22,9 +22,34 @@ namespace CampSleepaway.Controller
             return visitors;
         }
 
-        public static void AddNextOfKin()
+        public static void AddNextOfKin(int camperId)
         {
-            throw new NotImplementedException();
+            Console.Clear();
+
+            NextOfKin nextOfKin = new();
+
+            nextOfKin.FirstName = HelperMethods.GetString("First Name:");
+            nextOfKin.LastName = HelperMethods.GetString("Last Name:");
+            nextOfKin.PhoneNumber = HelperMethods.GetString("Phone Number:");
+            nextOfKin.StartDate = HelperMethods.GetDateTime("Start Date:");
+            nextOfKin.EndDate = HelperMethods.GetDateTime("End Date:");
+            nextOfKin.RelationType = HelperMethods.GetRelationType("Choose Relation:");
+
+            string prompt = "Save changes to Db? (true/false)";
+            bool save = HelperMethods.GetBool(prompt);
+            if (save)
+            {
+                using CampSleepawayContext context = new();
+                context.NextOfKins.Add(nextOfKin);
+                context.CamperNextOfKins.Add(new CamperNextOfKin() { CamperId = camperId, NextOfKin = nextOfKin });
+                context.SaveChanges();
+
+                HelperMethods.ShowMessage($"{nextOfKin.FirstName} {nextOfKin.LastName} was created!");
+            }
+            else
+            {
+                HelperMethods.ShowMessage("Person was not added...");
+            }
         }
 
         public static void UpdateNextOfKin(int nextOfKinId)

@@ -28,6 +28,8 @@ namespace CampSleepaway.Menus
 
             Console.WriteLine();
 
+            int chosenKinId;
+
             int selection = HelperMethods.ShowMenu("What would you like to do?", new[]
             {
                 "Add new next of kin",
@@ -38,14 +40,15 @@ namespace CampSleepaway.Menus
             switch (selection)
             {
                 case 0:
-                    NextOfKinController.AddNextOfKin();
+                    NextOfKinController.AddNextOfKin(camperId);
                     break;
                 case 1:
-                    var chosenKinId = SubMenu(camperId);
+                    chosenKinId = SubMenu(camperId);
                     NextOfKinController.UpdateNextOfKin(chosenKinId);
                     break;
                 case 2:
-                    NextOfKinController.DeleteNextOfKin();
+                    chosenKinId = SubMenu(camperId);
+                    NextOfKinController.DeleteNextOfKin(chosenKinId);
                     break;
                 default:
                     break;
