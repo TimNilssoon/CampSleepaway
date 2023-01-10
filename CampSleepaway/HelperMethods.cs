@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CampSleepaway.Model;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -137,6 +138,15 @@ namespace CampSleepaway
             }
 
             return result;
+        }
+
+        public static RelationType GetRelationType(string prompt)
+        {
+            List<string> types = Enum.GetNames(typeof(RelationType)).ToList();
+
+            int selection = ShowMenu(prompt, types);
+
+            return (RelationType)selection;
         }
     }
 }
