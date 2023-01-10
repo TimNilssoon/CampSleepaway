@@ -85,14 +85,27 @@ namespace CampSleepaway.Menus
                     UpdateEndDate(camper);
                     break;
                 case 3:
-                    UpdateCamp(camper);
+                    UpdateCabin(camper);
+                    break;
+                case 4:
+                    DeleteCamper(camper);
                     break;
                 default:
                     break;
             }
         }
 
-        private static void UpdateCamp(Camper camper)
+        private static void DeleteCamper(Camper camper)
+        {
+            using CampSleepawayContext context = new();
+            context.Campers.Remove(camper);
+
+            context.SaveChanges();
+
+            HelperMethods.ShowMessage($"Deleted {camper.FirstName} {camper.LastName}!");
+        }
+
+        private static void UpdateCabin(Camper camper)
         {
             Console.Clear();
 
