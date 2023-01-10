@@ -102,5 +102,23 @@ namespace CampSleepaway
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
+
+        public static DateOnly GetDateOnly(string prompt)
+        {
+            Console.Clear();
+            Console.Write($"{prompt} ");
+
+            DateOnly result;
+
+            while (!DateOnly.TryParseExact(Console.ReadLine(), "yyyy-MM-dd", out result))
+            {
+                Console.Clear();
+                Console.WriteLine("Invalid input, try again...");
+
+                Console.Write($"{prompt} ");
+            }
+
+            return result;
+        }
     }
 }

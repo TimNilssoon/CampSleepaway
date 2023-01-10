@@ -67,9 +67,17 @@ namespace CampSleepaway.Menus
                 case 0:
                     ModifyPhoneNumber(camper);
                     break;
+                case 1:
+                    ModifyStartDate(camper);
+                    break;
                 default:
                     break;
             }
+        }
+
+        private static void ModifyStartDate(Camper camper)
+        {
+            throw new NotImplementedException();
         }
 
         private static void ModifyPhoneNumber(Camper camper)
