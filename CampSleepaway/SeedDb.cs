@@ -68,5 +68,34 @@ namespace CampSleepaway
                 context.SaveChanges();
             }
         }
+
+        public static void SeedCabinConnections()
+        {
+            using (CampSleepawayContext context = new())
+            {
+                var cabinsDb = context.Cabins.ToArray();
+                var councelorsDb = context.Councelors.ToArray();
+                var campersDb = context.Campers.ToArray();
+
+                // Something similar to a sliding window search to seed the campers into cabins
+                // Seed a councelor into 
+                int max = 4;
+                int min = 0;
+                for (int i = 0; i < cabinsDb.Length; i++)
+                {
+                    cabinsDb[i].Campers = new List<Camper>();
+                    for(int j = min; j < max; j++)
+                    {
+                        cabinsDb[i].Campers.Add(campersDb[j]);
+                    }
+
+                    min = max;
+                    max += 4;
+
+                    cabinsDb[i].Councelor = councelorsDb[i];
+                }
+                context.SaveChanges();
+            }
+        }
     }
 }

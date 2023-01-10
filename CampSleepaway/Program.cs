@@ -12,11 +12,7 @@ namespace CampSleepaway
             var dbCouncelor = context.Councelors.FirstOrDefault();
             var dbCabin = context.Cabins.FirstOrDefault();
 
-            if (dbCamper is null)
-            {
-                SeedDb.SeedCampers();
-                SeedDb.SeedNextOfKin();
-            }
+
 
             if (dbCouncelor is null)
             {
@@ -27,6 +23,13 @@ namespace CampSleepaway
             if (dbCabin is null)
             {
                 SeedDb.SeedCabins();
+            }
+
+            if (dbCamper is null)
+            {
+                SeedDb.SeedCampers();
+                SeedDb.SeedNextOfKin();
+                SeedDb.SeedCabinConnections();
             }
 
             MainMenu.Menu();
