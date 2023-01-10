@@ -17,7 +17,7 @@
                 {
                     "Manage Campers",
                     "Manage Councelors",
-                    "Manage Camps"
+                    "Manage Cabins"
                 });
 
                 switch (selection)

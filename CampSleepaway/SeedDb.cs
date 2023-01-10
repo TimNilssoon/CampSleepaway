@@ -27,6 +27,22 @@ namespace CampSleepaway
 
             using CampSleepawayContext context = new();
 
+            var cabinsDb = context.Cabins.ToList();
+
+            int max = 4;
+            int min = 0;
+            for (int i = 0; i < cabinsDb.Count; i++)
+            {
+                cabinsDb[i].Campers = new List<Camper>();
+                for (int j = min; j < max; j++)
+                {
+                    campers[j].Cabin = cabinsDb[i];
+                }
+
+                min = max;
+                max += 4;
+            }
+
             context.AddRange(campers);
             context.SaveChanges();
         }

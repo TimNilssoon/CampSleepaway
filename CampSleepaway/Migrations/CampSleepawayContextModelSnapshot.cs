@@ -54,7 +54,7 @@ namespace CampSleepaway.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CamperId"));
 
-                    b.Property<int?>("CabinId")
+                    b.Property<int>("CabinId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -181,7 +181,9 @@ namespace CampSleepaway.Migrations
                 {
                     b.HasOne("CampSleepaway.Model.Cabin", "Cabin")
                         .WithMany("Campers")
-                        .HasForeignKey("CabinId");
+                        .HasForeignKey("CabinId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Cabin");
                 });

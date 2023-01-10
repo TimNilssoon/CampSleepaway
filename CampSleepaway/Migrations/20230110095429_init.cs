@@ -72,7 +72,7 @@ namespace CampSleepaway.Migrations
                 {
                     CamperId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CabinId = table.Column<int>(type: "int", nullable: true),
+                    CabinId = table.Column<int>(type: "int", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -87,7 +87,8 @@ namespace CampSleepaway.Migrations
                         name: "FK_Camper_Cabin_CabinId",
                         column: x => x.CabinId,
                         principalTable: "Cabin",
-                        principalColumn: "CabinId");
+                        principalColumn: "CabinId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

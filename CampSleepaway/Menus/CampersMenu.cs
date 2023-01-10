@@ -1,5 +1,6 @@
 ﻿using CampSleepaway.Data;
 using CampSleepaway.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace CampSleepaway.Menus
         {
             using CampSleepawayContext context = new();
 
-            List<Camper> campers = context.Campers.ToList();
+            List<Camper> campers = context.Campers.Include(cabin => cabin.Cabin).AsSplitQuery().ToList();
 
             return campers;
         }
@@ -54,8 +55,33 @@ namespace CampSleepaway.Menus
 
             int selection = HelperMethods.ShowMenu(title, new[]
             {
-                ""
+                "Modify Phone Number",
+                "Modify Start Date",
+                "Modify End Date",
+                "Move Camper to another Camp",
+                "Delete Camper"
             });
+
+            switch (selection)
+            {
+                case 0:
+                    ModifyPhoneNumber(camper);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static void ModifyPhoneNumber(Camper camper)
+        {
+            string newnumber = "";
+            using CampSleepawayContext context = new();
+
+            var camperDb = context.Campers.SingleOrDefault(c => c.CamperId == camper.CamperId);
+
+            camperDb.PhoneNumber = newnumber;
+
+            context.SaveChanges();
         }
     }
 }

@@ -11,6 +11,10 @@ namespace CampSleepaway.Model
     [Table(nameof(Cabin))]
     public class Cabin
     {
+        public Cabin()
+        {
+            this.Campers = new();
+        }
         public int CabinId { get; set; }
         public string Name { get; set; }
         public List<Camper>? Campers { get; set; }

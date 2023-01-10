@@ -11,7 +11,8 @@ namespace CampSleepaway.Model
     public class Camper : Person
     {
         public int CamperId { get; set; }
-        public Cabin? Cabin { get; set; }
+        public int CabinId { get; set; }
+        public Cabin Cabin { get; set; }
         public DateTime DateOfBirth { get; set; }
     }
 }
