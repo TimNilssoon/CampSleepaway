@@ -14,5 +14,19 @@ namespace CampSleepaway.Controller
 
             return newDate;
         }
+
+        public static DateTime ProccessEndDate()
+        {
+            DateTime newDate = HelperMethods.GetDateTime("Enter a new end time:");
+
+            return newDate;
+        }
+
+        public static string ProccessPhoneNumber()
+        {
+            string newPhoneNumber = HelperMethods.GetString("Enter new a phone number:");
+
+            return newPhoneNumber;
+        }
     }
 }
