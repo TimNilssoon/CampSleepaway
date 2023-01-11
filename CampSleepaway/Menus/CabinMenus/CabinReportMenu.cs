@@ -1,4 +1,5 @@
-﻿using CampSleepaway.Data;
+﻿using CampSleepaway.Controller;
+using CampSleepaway.Data;
 using CampSleepaway.Model;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,14 @@ namespace CampSleepaway.Menus.CabinMenus
 
             foreach(var camper in cabin.Campers)
             {
-                Console.WriteLine($" - {camper.GetFullName()}");
+                List<NextOfKin> kins = NextOfKinController.GetAllNextOfKin(camper);
+                Console.Write($" - {camper.GetFullName()}");
+                Console.Write("\t|Relatives: ");
+                foreach(var kin in kins)
+                {
+                    Console.Write($"{kin.GetFullName()} ");
+                }
+                Console.WriteLine();
             }
 
             Console.WriteLine();
