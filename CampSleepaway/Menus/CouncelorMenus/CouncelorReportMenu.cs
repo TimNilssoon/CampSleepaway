@@ -40,7 +40,7 @@ namespace CampSleepaway.Menus.CouncelorMenus
                 Console.WriteLine($" - {camper.GetFullName()}");
             }
 
-            Console.ReadKey();
+            HelperMethods.ShowMessage();
         }
     }
 }

@@ -34,6 +34,7 @@ namespace CampSleepaway.Menus
                         CouncelorsMenu.Menu();
                         break;
                     case 2:
+                        CabinsMenu.Menu();
                         break;
                     case 3:
                         CabinReportMenu.Menu();
