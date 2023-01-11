@@ -140,6 +140,21 @@ namespace CampSleepaway
             return result;
         }
 
+        public static int GetInt(string prompt)
+        {
+            Console.Clear();
+            Console.Write(prompt);
+
+            int newFavorite;
+
+            while (!int.TryParse(Console.ReadLine(), out newFavorite))
+            {
+                Console.Write("Please enter a number: ");
+            }
+
+            return newFavorite;
+        }
+
         public static RelationType GetRelationType(string prompt)
         {
             List<string> types = Enum.GetNames(typeof(RelationType)).ToList();
