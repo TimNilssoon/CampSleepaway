@@ -32,7 +32,16 @@ namespace CampSleepaway.Menus.CabinMenus
             Console.Clear();
 
             Console.WriteLine($"Cabin: {cabin.Name}");
-            Console.WriteLine($"Councelor: {cabin.Councelor.GetFullName()}\n");
+
+            if(cabin.Councelor is null)
+            {
+                Console.WriteLine(" -Warning- Cabin does not have a Councelor");
+            }
+            else
+            {
+                Console.WriteLine($"Councelor: {cabin.Councelor.GetFullName()}\n");
+            }
+
             Console.WriteLine("Assigned campers:");
 
             foreach(var camper in cabin.Campers)
