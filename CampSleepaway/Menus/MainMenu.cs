@@ -28,6 +28,9 @@
                     case 1:
                         CouncelorsMenu.Menu();
                         break;
+                    case 2:
+                        CabinsMenu.Menu();
+                        break;
                     default:
                         break;
                 }
