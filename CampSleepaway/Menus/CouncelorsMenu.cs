@@ -1,4 +1,5 @@
-﻿using CampSleepaway.Data;
+﻿using CampSleepaway.Controller;
+using CampSleepaway.Data;
 using CampSleepaway.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,20 +12,11 @@ namespace CampSleepaway.Menus
 {
     public class CouncelorsMenu
     {
-        private static List<Councelor> GetCouncelors()
-        {
-            using CampSleepawayContext context = new();
-
-            List<Councelor> councelors = context.Councelors.Include(cabin => cabin.Cabin).AsSplitQuery().ToList();
-
-            return councelors;
-        }
-
         public static void Menu()
         {
             Console.Clear();
 
-            List<Councelor> councelors = GetCouncelors();
+            List<Councelor> councelors = CouncelorController.GetCouncelors();
             List<string> options = new();
 
             foreach (var councelor in councelors)
@@ -39,6 +31,8 @@ namespace CampSleepaway.Menus
 
         public static void ManageCouncelorMenu(Councelor councelor)
         {
+            int councelorId = councelor.CouncelorId;
+
             Console.Clear();
             string temp = "None";
             if (councelor.Cabin is not null)
@@ -65,7 +59,24 @@ namespace CampSleepaway.Menus
             switch (selection)
             {
                 case 0:
-                    ModifyPhoneNumber(councelor);
+                    string newPhoneNumber = PersonController.ProccessPhoneNumber();
+                    CouncelorController.UpdatePhoneNumber(councelorId, newPhoneNumber);
+                    break;
+                case 1:
+                    DateTime newStartDate = PersonController.ProccessStartDate();
+                    CouncelorController.UpdateCouncelorStartDate(councelorId, newStartDate);
+                    break;
+                case 2:
+                    DateTime newEndDate = PersonController.ProccessEndDate();
+                    CouncelorController.UpdateCouncelorEndDate(councelorId,newEndDate);
+                    break;
+                case 3:
+                    CouncelorController.UpdateFavoriteNumber(councelorId);
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    CouncelorController.DeleteCouncelor(councelorId);
                     break;
                 default:
                     break;
