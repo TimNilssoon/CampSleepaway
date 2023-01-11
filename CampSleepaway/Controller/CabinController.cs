@@ -28,9 +28,11 @@ namespace CampSleepaway.Controller
 
             int selection = HelperMethods.ShowMenu("Select new cabin", cabinNames);
             using CampSleepawayContext context = new();
-            var cabinDb = context.Cabins.Include(c => c.Campers.Where(camper => camper.CabinId == cabins[selection].CabinId)).ToList();
 
-            if (cabinDb.Campers.Count == 4)
+            var campersDb = context.Campers.Where(c => c.CabinId == cabins[selection].CabinId).ToList();
+            var cabinDb = context.Cabins.Single(c => c.CabinId == cabins[selection].CabinId);
+
+            if (campersDb.Count == 4)
             {
                 HelperMethods.ShowMessage("This cabin is already full, select another one...");
                 return;
