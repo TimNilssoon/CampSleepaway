@@ -41,12 +41,6 @@ namespace CampSleepaway.Controller
             camper.StartDate = HelperMethods.GetDateTime("Start Date:");
             camper.EndDate = HelperMethods.GetDateTime("End Date:");
 
-            bool addToCabin = HelperMethods.GetBool("Do you want to assign this camper to a cabin? (true/false)");
-            if (addToCabin)
-            {
-                CabinController.AddCamperToCabin(camper);
-            }
-
             string prompt = "Save changes to Db? (true/false)";
             bool save = HelperMethods.GetBool(prompt);
             if (save)

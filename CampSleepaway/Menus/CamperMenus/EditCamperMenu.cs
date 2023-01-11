@@ -61,7 +61,7 @@ namespace CampSleepaway.Menus.CamperMenus
                     CamperController.UpdateCamperEndDate(camper.CamperId, newEndDate);
                     break;
                 case 3:
-                    CabinController.AddCamperToCabin(camper);
+                    CabinController.AddCamperToCabin(camper.CamperId);
                     break;
                 case 4:
                     CamperController.DeleteCamper(camper.CamperId);

@@ -1,6 +1,8 @@
-﻿using CampSleepaway.Data;
+﻿using Azure.Core;
+using CampSleepaway.Data;
 using CampSleepaway.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +22,42 @@ namespace CampSleepaway.Controller
             return cabins;
         }
 
-        public static void AddCamperToCabin(Camper camper)
+        public static void AddCabin()
+        {
+            using CampSleepawayContext context = new();
+
+            string name = HelperMethods.GetString("Cabin Name:");
+
+            context.Cabins.Add(new Cabin() { Name = name });
+
+            context.SaveChanges();
+        }
+
+        public static void DeleteCabin(int cabinId)
+        {
+            bool delete = HelperMethods.GetBool("Are you sure? (true/false)");
+            if (delete)
+            {
+                using CampSleepawayContext context = new();
+                var cabinDb = context.Cabins.Single(c => c.CabinId == cabinId);
+
+                context.Cabins.Remove(cabinDb);
+                context.SaveChanges();
+
+                HelperMethods.ShowMessage($"Camper, {cabinDb.Name}, was deleted!");
+            }
+            else
+            {
+                HelperMethods.ShowMessage("Camper was not deleted...");
+            }
+        }
+
+        public static void UpdateName()
+        {
+
+        }
+
+        public static void AddCamperToCabin(int camperId)
         {
             Console.WriteLine();
             List<Cabin> cabins = GetCabins();
@@ -28,6 +65,8 @@ namespace CampSleepaway.Controller
 
             int selection = HelperMethods.ShowMenu("Select new cabin", cabinNames);
             using CampSleepawayContext context = new();
+
+            var camperDb = context.Campers.Single(c => c.CamperId == camperId);
 
             var campersDb = context.Campers.Where(c => c.CabinId == cabins[selection].CabinId).ToList();
             var cabinDb = context.Cabins.Single(c => c.CabinId == cabins[selection].CabinId);
@@ -44,7 +83,7 @@ namespace CampSleepaway.Controller
                 return;
             }
 
-            camper.CabinId = cabins[selection].CabinId;
+            camperDb.CabinId = cabins[selection].CabinId;
 
             context.SaveChanges();
         }
