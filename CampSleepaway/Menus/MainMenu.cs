@@ -1,4 +1,5 @@
 ﻿using CampSleepaway.Menus.CabinMenus;
+using CampSleepaway.Menus.CouncelorMenus;
 
 namespace CampSleepaway.Menus
 {
@@ -36,6 +37,9 @@ namespace CampSleepaway.Menus
                         break;
                     case 3:
                         CabinReportMenu.Menu();
+                        break;
+                    case 4:
+                        CouncelorReportMenu.Menu();
                         break;
                     default:
                         break;
