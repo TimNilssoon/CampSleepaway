@@ -97,6 +97,12 @@ namespace CampSleepaway
             return Console.ReadLine();
         }
 
+        public static void ShowMessage()
+        {
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
+
         public static void ShowMessage(string message)
         {
             Console.Clear();
