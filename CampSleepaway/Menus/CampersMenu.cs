@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CampSleepaway.Controller;
 using CampSleepaway.Menus.CamperMenus;
 
 namespace CampSleepaway.Menus
@@ -26,7 +27,7 @@ namespace CampSleepaway.Menus
                     ListCampersMenu.Menu();
                     break;
                 case 1:
-                    AddCamperMenu.AddCamper();
+                    CamperController.AddCamper();
                     break;
                 case 2:
                     EditCamperMenu.Menu();
