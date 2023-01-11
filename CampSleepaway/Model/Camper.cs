@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CampSleepaway.Model
 {
     [Table(nameof(Camper))]
-    public class Camper : Person
+    public class Camper : Participant
     {
         public int CamperId { get; set; }
         public int? CabinId { get; set; }

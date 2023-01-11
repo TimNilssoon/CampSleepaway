@@ -3,7 +3,7 @@
 namespace CampSleepaway.Model
 {
     [Table(nameof(Councelor))]
-    public class Councelor : Person
+    public class Councelor : Participant
     {
         public int CouncelorId { get; set; }
         public Cabin Cabin { get; set; }

@@ -31,8 +31,6 @@ namespace CampSleepaway.Controller
             nextOfKin.FirstName = HelperMethods.GetString("First Name:");
             nextOfKin.LastName = HelperMethods.GetString("Last Name:");
             nextOfKin.PhoneNumber = HelperMethods.GetString("Phone Number:");
-            nextOfKin.StartDate = HelperMethods.GetDateTime("Start Date:");
-            nextOfKin.EndDate = HelperMethods.GetDateTime("End Date:");
             nextOfKin.RelationType = HelperMethods.GetRelationType("Choose Relation:");
 
             string prompt = "Save changes to Db? (true/false)";
@@ -67,8 +65,6 @@ namespace CampSleepaway.Controller
                     "First Name",
                     "Last Name",
                     "Phone Number",
-                    "Start Date",
-                    "End Date",
                     "Relation Type",
                     "Save Changes"
                 });
@@ -105,17 +101,9 @@ namespace CampSleepaway.Controller
                         }
                         break;
                     case 3:
-                        DateTime newStartDate = HelperMethods.GetDateTime("Start Date:");
-                        nextOfKin.StartDate = newStartDate;
-                        break;
-                    case 4:
-                        DateTime newEndDate = HelperMethods.GetDateTime("End Date:");
-                        nextOfKin.EndDate = newEndDate;
-                        break;
-                    case 5:
                         RelationType type = HelperMethods.GetRelationType("Choose Relation:");
                         break;
-                    case 6:
+                    case 4:
                         context.SaveChanges();
                         done = true;
                         break;
