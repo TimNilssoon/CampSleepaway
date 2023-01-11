@@ -42,16 +42,9 @@ namespace CampSleepaway.Controller
             camper.EndDate = HelperMethods.GetDateTime("End Date:");
 
             bool addToCabin = HelperMethods.GetBool("Do you want to assign this camper to a cabin? (true/false)");
-
             if (addToCabin)
             {
-                Console.WriteLine();
-                List<Cabin> cabins = CabinController.GetCabins();
-                List<string> cabinNames = cabins.Select(c => c.Name).ToList();
-
-                int selection = HelperMethods.ShowMenu("Select new cabin", cabinNames);
-
-                camper.CabinId = cabins[selection].CabinId;
+                CabinController.AddCamperToCabin(camper);
             }
 
             string prompt = "Save changes to Db? (true/false)";
@@ -69,6 +62,8 @@ namespace CampSleepaway.Controller
                 HelperMethods.ShowMessage("Person was not added...");
             }
         }
+
+        
 
         public static void UpdateCamperStartDate(int id, DateTime newStartTime)
         {
@@ -102,24 +97,6 @@ namespace CampSleepaway.Controller
             context.SaveChanges();
 
             HelperMethods.ShowMessage("Updated phone number!");
-        }
-
-        public static void UpdateCabin(int camperId)
-        {
-            Console.Clear();
-
-            List<Cabin> cabins = CabinController.GetCabins();
-            List<string> cabinNames = cabins.Select(c => c.Name).ToList();
-
-            int selection = HelperMethods.ShowMenu("Select new cabin", cabinNames);
-
-            using CampSleepawayContext context = new();
-            var camperDb = context.Campers.Single(c => c.CamperId == camperId);
-
-            camperDb.CabinId = cabins[selection].CabinId;
-            context.SaveChanges();
-
-            HelperMethods.ShowMessage("Updated camp!");
         }
 
         public static void DeleteCamper(int camperId)

@@ -19,5 +19,32 @@ namespace CampSleepaway.Controller
 
             return cabins;
         }
+
+        public static void AddCamperToCabin(Camper camper)
+        {
+            Console.WriteLine();
+            List<Cabin> cabins = GetCabins();
+            List<string> cabinNames = cabins.Select(c => c.Name).ToList();
+
+            int selection = HelperMethods.ShowMenu("Select new cabin", cabinNames);
+            using CampSleepawayContext context = new();
+            var cabinDb = context.Cabins.Include(c => c.Campers.Where(camper => camper.CabinId == cabins[selection].CabinId)).ToList();
+
+            if (cabinDb.Campers.Count == 4)
+            {
+                HelperMethods.ShowMessage("This cabin is already full, select another one...");
+                return;
+            }
+
+            if (cabinDb.CouncelorId is null)
+            {
+                HelperMethods.ShowMessage("This cabin does not have a councelor, select another one...");
+                return;
+            }
+
+            camper.CabinId = cabins[selection].CabinId;
+
+            context.SaveChanges();
+        }
     }
 }

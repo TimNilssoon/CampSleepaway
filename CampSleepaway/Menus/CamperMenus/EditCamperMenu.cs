@@ -41,7 +41,7 @@ namespace CampSleepaway.Menus.CamperMenus
                 "Update Phone Number",
                 "Update Start Date",
                 "Update End Date",
-                "Move Camper to another Camp",
+                "Move Camper to another Cabin",
                 "Delete Camper",
                 "Manage next of kin"
             });
@@ -61,7 +61,7 @@ namespace CampSleepaway.Menus.CamperMenus
                     CamperController.UpdateCamperEndDate(camper.CamperId, newEndDate);
                     break;
                 case 3:
-                    CamperController.UpdateCabin(camper.CamperId);
+                    CabinController.AddCamperToCabin(camper);
                     break;
                 case 4:
                     CamperController.DeleteCamper(camper.CamperId);
