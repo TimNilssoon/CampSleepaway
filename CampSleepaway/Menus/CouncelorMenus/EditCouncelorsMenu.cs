@@ -34,20 +34,10 @@ namespace CampSleepaway.Menus
             int councelorId = councelor.CouncelorId;
 
             Console.Clear();
-            string temp = "None";
-            if (councelor.Cabin is not null)
-            {
-                temp = councelor.Cabin.Name;
-            }
+            
+            string info = councelor.GetInfo();
 
-            string title = $"{councelor.FirstName} {councelor.LastName}\n" +
-                $"Phone Number: {councelor.PhoneNumber}\n" +
-                $"Start Date: {councelor.StartDate:yyyy-MM-dd}\n" +
-                $"End Date: {councelor.EndDate:yyyy-MM-dd}\n" +
-                $"Favorite Number: {councelor.FavoriteNumber}" +
-                $"Cabin: {temp}\n";
-
-            int selection = HelperMethods.ShowMenu(title, new[]
+            int selection = HelperMethods.ShowMenu(info, new[]
             {
                 "Modify Phone Number",
                 "Modify Start Date",
@@ -74,6 +64,7 @@ namespace CampSleepaway.Menus
                     CouncelorController.UpdateFavoriteNumber(councelorId);
                     break;
                 case 4:
+                    //Not implemented yet
                     break;
                 case 5:
                     CouncelorController.DeleteCouncelor(councelorId);

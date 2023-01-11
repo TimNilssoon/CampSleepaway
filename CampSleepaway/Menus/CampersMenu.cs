@@ -24,7 +24,7 @@ namespace CampSleepaway.Menus
             switch (selection)
             {
                 case 0:
-                    ListCampersMenu.Menu();
+                    ListCouncelorMenu.Menu();
                     break;
                 case 1:
                     CamperController.AddCamper();
