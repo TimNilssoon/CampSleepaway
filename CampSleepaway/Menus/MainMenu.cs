@@ -17,7 +17,9 @@
                 {
                     "Manage Campers",
                     "Manage Councelors",
-                    "Manage Cabins"
+                    "Manage Cabins",
+                    "Cabin Reports",
+                    "Councelor Reports"
                 });
 
                 switch (selection)
@@ -27,6 +29,11 @@
                         break;
                     case 1:
                         CouncelorsMenu.Menu();
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+
                         break;
                     default:
                         break;
