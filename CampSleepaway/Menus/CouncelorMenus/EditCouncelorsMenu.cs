@@ -42,6 +42,7 @@ namespace CampSleepaway.Menus
                 "Modify Phone Number",
                 "Modify Start Date",
                 "Modify End Date",
+                "Modify Favorite Number",
                 "Move Councelor to another Camp",
                 "Delete Councelor"
             });
@@ -64,7 +65,7 @@ namespace CampSleepaway.Menus
                     CouncelorController.UpdateFavoriteNumber(councelorId);
                     break;
                 case 4:
-                    //Not implemented yet
+                    CouncelorController.UpdateCabin(councelorId);
                     break;
                 case 5:
                     CouncelorController.DeleteCouncelor(councelorId);

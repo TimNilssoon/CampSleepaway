@@ -114,5 +114,30 @@ namespace CampSleepaway.Controller
                 HelperMethods.ShowMessage("Councelor was not deleted...");
             }
         }
+
+        public static void UpdateCabin(int councelorId)
+        {
+            Console.Clear();
+
+            List<Cabin> cabins = CabinController.GetCabins();
+            List<string> cabinNames = cabins.Select(c => c.Name).ToList();
+
+            int selection = HelperMethods.ShowMenu("Select new cabin", cabinNames);
+
+            using CampSleepawayContext context = new();
+            var oldCabinDb = context.Cabins.SingleOrDefault(c => c.CouncelorId == councelorId);
+
+            if (oldCabinDb is not null)
+            {
+                oldCabinDb.CouncelorId = null;
+            }
+
+            var cabinDb = context.Cabins.Single(c => c.CabinId == cabins[selection].CabinId);
+
+            cabinDb.CouncelorId = councelorId;
+            context.SaveChanges();
+
+            HelperMethods.ShowMessage("Updated councelor!");
+        }
     }
 }
