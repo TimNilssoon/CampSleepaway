@@ -1,4 +1,5 @@
 ﻿using CampSleepaway.Controller;
+using CampSleepaway.Menus.CabinMenus;
 using CampSleepaway.Menus.CamperMenus;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace CampSleepaway.Menus
             int selection = HelperMethods.ShowMenu("What would you like to do?", new[]
             {
                 "Add Cabin",
-                "Edit Cabin"
+                "Rename Cabin"
             });
 
             switch (selection)
@@ -26,7 +27,7 @@ namespace CampSleepaway.Menus
                     CabinController.AddCabin();
                     break;
                 case 1:
-                    EditCamperMenu.Menu();
+                    EditCabinMenu.Menu();
                     break;
                 default:
                     break;

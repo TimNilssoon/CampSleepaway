@@ -22,6 +22,18 @@ namespace CampSleepaway.Controller
             return cabins;
         }
 
+        public static void UpdateCabinName(int cabinId)
+        {
+            string newName = HelperMethods.GetString("New Cabin Name:");
+
+            using CampSleepawayContext context = new();
+            var cabin = context.Cabins.Single(c => c.CabinId == cabinId);
+
+            cabin.Name = newName;
+
+            context.SaveChanges();
+        }
+
         public static void AddCabin()
         {
             using CampSleepawayContext context = new();
@@ -50,11 +62,6 @@ namespace CampSleepaway.Controller
             {
                 HelperMethods.ShowMessage("Camper was not deleted...");
             }
-        }
-
-        public static void UpdateName()
-        {
-
         }
 
         public static void AddCamperToCabin(int camperId)
