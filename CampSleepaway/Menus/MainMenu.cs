@@ -25,6 +25,9 @@
                     case 0:
                         CampersMenu.Menu();
                         break;
+                    case 1:
+                        CouncelorsMenu.Menu();
+                        break;
                     default:
                         break;
                 }
