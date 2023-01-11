@@ -49,6 +49,7 @@ namespace CampSleepaway.Menus.CabinMenus
                 Console.WriteLine($" - {camper.GetFullName()}");
             }
 
+            Console.WriteLine();
             HelperMethods.ShowMessage();
         }
     }
