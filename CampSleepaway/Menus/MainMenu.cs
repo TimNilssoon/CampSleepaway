@@ -1,4 +1,7 @@
-﻿namespace CampSleepaway.Menus
+﻿using CampSleepaway.Menus.CabinMenus;
+using CampSleepaway.Menus.CouncelorMenus;
+
+namespace CampSleepaway.Menus
 {
     public class MainMenu
     {
@@ -17,7 +20,9 @@
                 {
                     "Manage Campers",
                     "Manage Councelors",
-                    "Manage Cabins"
+                    "Manage Cabins",
+                    "Cabin Reports",
+                    "Councelor Reports"
                 });
 
                 switch (selection)
@@ -29,7 +34,12 @@
                         CouncelorsMenu.Menu();
                         break;
                     case 2:
-                        CabinsMenu.Menu();
+                        break;
+                    case 3:
+                        CabinReportMenu.Menu();
+                        break;
+                    case 4:
+                        CouncelorReportMenu.Menu();
                         break;
                     default:
                         break;
