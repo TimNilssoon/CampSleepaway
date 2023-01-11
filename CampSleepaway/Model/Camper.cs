@@ -28,7 +28,7 @@ namespace CampSleepaway.Model
                 $"Start Date: {StartDate:yyyy-MM-dd}\n" +
                 $"End Date: {EndDate:yyyy-MM-dd}\n" +
                 $"Date of Birth: {DateOfBirth:yyyy-MM-dd}\n" +
-                $"Camp: {cabinName}\n";
+                $"Cabin: {cabinName}\n";
 
             return info;
         }

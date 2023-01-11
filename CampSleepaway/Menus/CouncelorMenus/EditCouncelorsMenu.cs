@@ -45,7 +45,7 @@ namespace CampSleepaway.Menus
                 $"Start Date: {councelor.StartDate:yyyy-MM-dd}\n" +
                 $"End Date: {councelor.EndDate:yyyy-MM-dd}\n" +
                 $"Favorite Number: {councelor.FavoriteNumber}" +
-                $"Camp: {temp}\n";
+                $"Cabin: {temp}\n";
 
             int selection = HelperMethods.ShowMenu(title, new[]
             {
