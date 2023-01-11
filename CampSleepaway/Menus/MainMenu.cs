@@ -1,6 +1,4 @@
-﻿using CampSleepaway.Menus.CamperMenus;
-
-namespace CampSleepaway.Menus
+﻿namespace CampSleepaway.Menus
 {
     public class MainMenu
     {

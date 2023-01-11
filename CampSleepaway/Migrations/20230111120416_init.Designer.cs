@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampSleepaway.Migrations
 {
     [DbContext(typeof(CampSleepawayContext))]
-    [Migration("20230110095429_init")]
+    [Migration("20230111120416_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -57,7 +57,7 @@ namespace CampSleepaway.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CamperId"));
 
-                    b.Property<int>("CabinId")
+                    b.Property<int?>("CabinId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -184,9 +184,7 @@ namespace CampSleepaway.Migrations
                 {
                     b.HasOne("CampSleepaway.Model.Cabin", "Cabin")
                         .WithMany("Campers")
-                        .HasForeignKey("CabinId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CabinId");
 
                     b.Navigation("Cabin");
                 });

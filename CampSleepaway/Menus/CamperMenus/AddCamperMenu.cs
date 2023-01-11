@@ -1,4 +1,5 @@
-﻿using CampSleepaway.Data;
+﻿using CampSleepaway.Controller;
+using CampSleepaway.Data;
 using CampSleepaway.Model;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,19 @@ namespace CampSleepaway.Menus.CamperMenus
             camper.DateOfBirth = HelperMethods.GetDateTime("Date of Birth (yyyy-MM-dd):");
             camper.StartDate = HelperMethods.GetDateTime("Start Date:");
             camper.EndDate = HelperMethods.GetDateTime("End Date:");
+
+            bool addToCabin = HelperMethods.GetBool("Do you want to assign this camper to a cabin? (true/false)");
+
+            if (addToCabin)
+            {
+                Console.WriteLine();
+                List<Cabin> cabins = CabinController.GetCabins();
+                List<string> cabinNames = cabins.Select(c => c.Name).ToList();
+
+                int selection = HelperMethods.ShowMenu("Select new cabin", cabinNames);
+
+                camper.CabinId = cabins[selection].CabinId;
+            }
 
             string prompt = "Save changes to Db? (true/false)";
             bool save = HelperMethods.GetBool(prompt);
