@@ -1,4 +1,5 @@
 ﻿using CampSleepaway.Controller;
+using CampSleepaway.Menus.CouncelorMenus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace CampSleepaway.Menus
             switch (selection)
             {
                 case 0:
-                    ListCouncelorMenu.Menu();
+                    ListCouncelorsMenu.Menu();
                     break;
                 case 1:
                     CouncelorController.AddCouncelor();

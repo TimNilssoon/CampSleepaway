@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CampSleepaway.Menus
 {
-    public class ListCouncelorMenu
+    public class ListCampersMenu
     {
         public static void Menu()
         {
