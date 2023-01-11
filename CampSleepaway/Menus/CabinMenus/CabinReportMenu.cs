@@ -49,10 +49,14 @@ namespace CampSleepaway.Menus.CabinMenus
             {
                 List<NextOfKin> kins = NextOfKinController.GetAllNextOfKin(camper);
                 Console.Write($" - {camper.GetFullName()}");
-                Console.Write("\t|Relatives: ");
-                foreach(var kin in kins)
+
+                if (kins.Count != 0)
                 {
-                    Console.Write($"{kin.GetFullName()} ");
+                    Console.Write("\t|Relatives: ");
+                    foreach (var kin in kins)
+                    {
+                        Console.Write($"{kin.GetFullName()} ");
+                    }
                 }
                 Console.WriteLine();
             }
