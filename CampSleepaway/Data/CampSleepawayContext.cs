@@ -25,6 +25,6 @@ namespace CampSleepaway.Data
         public DbSet<Councelor> Councelors { get; set; }
         public DbSet<NextOfKin> NextOfKins { get; set; }
         public DbSet<Cabin> Cabins { get; set; }
-        public DbSet<CamperNextOfKin> CamperNextOfKins { get; set; }
+        public DbSet<Visit> CamperNextOfKins { get; set; }
     }
 }

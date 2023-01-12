@@ -15,9 +15,10 @@ namespace CampSleepaway.Controller
         {
             using CampSleepawayContext context = new();
 
-            var nextOfKins = context.CamperNextOfKins.Include(n => n.NextOfKin).Where(c => c.CamperId == camper.CamperId).ToList();
+            var nextOfKins = context.CamperNextOfKins.Include(n => n.Visitors).Where(c => c.CamperId == camper.CamperId).ToList();
 
-            List<NextOfKin> visitors = nextOfKins.Select(n => n.NextOfKin).ToList();
+            List<NextOfKin> visitors = context.NextOfKins.Where(c => c.VisitId == camper.VisitId).ToList();
+            //var campersDb = context.Campers.Where(c => c.CabinId == cabins[selection].CabinId).ToList();
 
             return visitors;
         }
@@ -39,7 +40,6 @@ namespace CampSleepaway.Controller
             {
                 using CampSleepawayContext context = new();
                 context.NextOfKins.Add(nextOfKin);
-                context.CamperNextOfKins.Add(new CamperNextOfKin() { CamperId = camperId, NextOfKin = nextOfKin });
                 context.SaveChanges();
 
                 HelperMethods.ShowMessage($"{nextOfKin.FirstName} {nextOfKin.LastName} was created!");

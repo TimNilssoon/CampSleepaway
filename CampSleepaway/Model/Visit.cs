@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace CampSleepaway.Model
 {
-    [Table(nameof(CamperNextOfKin))]
-    [PrimaryKey(nameof(CamperId), nameof(NextOfKinId))]
-    public class CamperNextOfKin
+    [Table(nameof(Visit))]
+    [PrimaryKey(nameof(VisitId))]
+    public class Visit
     {
-        public NextOfKin NextOfKin { get; set; }
-        public int NextOfKinId { get; set; }
+        public int VisitId { get; set; }
+        public List<NextOfKin> Visitors { get; set; }
         public Camper Camper { get; set; }
         public int CamperId { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
     }
 }

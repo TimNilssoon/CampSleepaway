@@ -59,7 +59,7 @@ namespace CampSleepaway
             context.SaveChanges();
         }
 
-        public static void SeedNextOfKin()
+        public static void SeedVisits()
         {
             using StreamReader reader = new(@"Seed Data\NextOfKin.json");
             var nextOfKin = JsonConvert.DeserializeObject<List<NextOfKin>>(reader.ReadToEnd(),
@@ -78,7 +78,7 @@ namespace CampSleepaway
                 var nextOfKinDb = context.NextOfKins.Take(4).ToArray();
                 for (int i = 0; i < 4; i++)
                 {
-                    context.CamperNextOfKins.Add(new CamperNextOfKin() { Camper = campersDb[i], NextOfKin = nextOfKinDb[i] });
+                    context.CamperNextOfKins.Add(new Visit() { Camper = campersDb[i] });
                 }
 
                 context.SaveChanges();
