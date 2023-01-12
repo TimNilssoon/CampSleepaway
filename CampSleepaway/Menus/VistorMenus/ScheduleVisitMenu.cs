@@ -34,29 +34,59 @@ namespace CampSleepaway.Menus.VistorMenus
         {
             Console.Clear();
 
-            Visit visit = new()
+            Visit visit = new();
+
+            DateTime startTime = HelperMethods.GetDateTime("Start Time (yyyy-MM-dd HH:mm):");
+            DateTime endTime = HelperMethods.GetDateTime("End Time (yyyy-MM-dd HH:mm):");
+
+            bool startTimeValid = ValidateStartTime(startTime);
+            bool endTimeValid = ValidateStartTime(endTime);
+
+            if (!startTimeValid)
             {
-                StartTime = HelperMethods.GetDateTime("StartTime:"),
-                EndTime = HelperMethods.GetDateTime("EndTime:")
-            };
+                HelperMethods.ShowMessage("Invalid start time...");
+                return;
+            }
 
+            if (!endTimeValid)
+            {
+                HelperMethods.ShowMessage("Invalid end time...");
+                return;
+            }
 
+            visit.StartTime = startTime;
+            visit.EndTime = endTime;
 
             using CampSleepawayContext context = new();
 
+            var visitDb = context.Visits.SingleOrDefault(v => v.CamperId == camperId);
+
             var nextOfKinDb = context.NextOfKins.Single(n => n.NextOfKinId == nextOfKin.NextOfKinId);
-            var camperDb = context.Campers.Single(c => c.CamperId == camperId);
 
-            visit.Camper = camperDb;
-            nextOfKinDb.Visit = visit;
+            if (visitDb is null)
+            {
+                var camperDb = context.Campers.Single(c => c.CamperId == camperId);
 
-            context.Visits.Add(visit);
+                visit.Camper = camperDb;
+                visit.StartTime = startTime;
+                visit.EndTime = endTime;
+                context.Visits.Add(visit);
+
+                visitDb = context.Visits.SingleOrDefault(v => v.CamperId == camperId);
+            }
+            else
+            {
+                visitDb.StartTime = startTime;
+                visitDb.EndTime = endTime;
+                nextOfKinDb.VisitId = visitDb.VisitId;
+            }
+
             context.SaveChanges();
 
             HelperMethods.ShowMessage("Visit scheduled!");
         }
 
-        private static bool StartTime(DateTime startTime)
+        private static bool ValidateStartTime(DateTime startTime)
         {
             bool output = false;
 
@@ -71,10 +101,8 @@ namespace CampSleepaway.Menus.VistorMenus
             return true;
         }
 
-        private static bool EndTime(DateTime endTime, DateTime startTime)
+        private static bool ValidateEndTime(DateTime endTime, DateTime startTime)
         {
-            bool output = false;
-
             DateTime latest = endTime.Date.AddHours(20);
             DateTime earlyest = endTime.Date.AddHours(10);
             DateTime threeHours = startTime.AddHours(3);
