@@ -12,7 +12,7 @@ namespace CampSleepaway.Model
     {
         public int CamperId { get; set; }
         public int? CabinId { get; set; }
-        public int VisitId { get; set; }
+        public List<Visit>? Visit { get; set; }
         public Cabin Cabin { get; set; }
         public DateTime DateOfBirth { get; set; }
 

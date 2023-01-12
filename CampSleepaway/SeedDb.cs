@@ -83,6 +83,16 @@ namespace CampSleepaway
 
                 context.SaveChanges();
             }
+
+            using(CampSleepawayContext context = new())
+            {
+                var visits = context.CamperNextOfKins.Take(4).ToArray();
+
+                for (int i = 0; i < 4; i++)
+                {
+                    //nextOfKinDb[i].Visit = visits[i];
+                }
+            }
         }
 
         public static void SeedCabinConnections()

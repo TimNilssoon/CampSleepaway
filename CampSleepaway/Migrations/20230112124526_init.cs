@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CampSleepaway.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,22 +27,6 @@ namespace CampSleepaway.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Councelor", x => x.CouncelorId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "NextOfKin",
-                columns: table => new
-                {
-                    NextOfKinId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RelationType = table.Column<int>(type: "int", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NextOfKin", x => x.NextOfKinId);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,27 +73,45 @@ namespace CampSleepaway.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CamperNextOfKin",
+                name: "Visit",
                 columns: table => new
                 {
-                    NextOfKinId = table.Column<int>(type: "int", nullable: false),
-                    CamperId = table.Column<int>(type: "int", nullable: false)
+                    VisitId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CamperId = table.Column<int>(type: "int", nullable: true),
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CamperNextOfKin", x => new { x.CamperId, x.NextOfKinId });
+                    table.PrimaryKey("PK_Visit", x => x.VisitId);
                     table.ForeignKey(
-                        name: "FK_CamperNextOfKin_Camper_CamperId",
+                        name: "FK_Visit_Camper_CamperId",
                         column: x => x.CamperId,
                         principalTable: "Camper",
-                        principalColumn: "CamperId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "CamperId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NextOfKin",
+                columns: table => new
+                {
+                    NextOfKinId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VisitId = table.Column<int>(type: "int", nullable: true),
+                    RelationType = table.Column<int>(type: "int", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NextOfKin", x => x.NextOfKinId);
                     table.ForeignKey(
-                        name: "FK_CamperNextOfKin_NextOfKin_NextOfKinId",
-                        column: x => x.NextOfKinId,
-                        principalTable: "NextOfKin",
-                        principalColumn: "NextOfKinId",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_NextOfKin_Visit_VisitId",
+                        column: x => x.VisitId,
+                        principalTable: "Visit",
+                        principalColumn: "VisitId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -125,22 +127,27 @@ namespace CampSleepaway.Migrations
                 column: "CabinId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CamperNextOfKin_NextOfKinId",
-                table: "CamperNextOfKin",
-                column: "NextOfKinId");
+                name: "IX_NextOfKin_VisitId",
+                table: "NextOfKin",
+                column: "VisitId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Visit_CamperId",
+                table: "Visit",
+                column: "CamperId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CamperNextOfKin");
+                name: "NextOfKin");
+
+            migrationBuilder.DropTable(
+                name: "Visit");
 
             migrationBuilder.DropTable(
                 name: "Camper");
-
-            migrationBuilder.DropTable(
-                name: "NextOfKin");
 
             migrationBuilder.DropTable(
                 name: "Cabin");

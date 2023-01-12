@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampSleepaway.Migrations
 {
     [DbContext(typeof(CampSleepawayContext))]
-    [Migration("20230112111636_Init")]
-    partial class Init
+    [Migration("20230112124526_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,21 +88,6 @@ namespace CampSleepaway.Migrations
                     b.ToTable("Camper");
                 });
 
-            modelBuilder.Entity("CampSleepaway.Model.CamperNextOfKin", b =>
-                {
-                    b.Property<int>("CamperId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NextOfKinId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CamperId", "NextOfKinId");
-
-                    b.HasIndex("NextOfKinId");
-
-                    b.ToTable("CamperNextOfKin");
-                });
-
             modelBuilder.Entity("CampSleepaway.Model.Councelor", b =>
                 {
                     b.Property<int>("CouncelorId")
@@ -160,9 +145,38 @@ namespace CampSleepaway.Migrations
                     b.Property<int>("RelationType")
                         .HasColumnType("int");
 
+                    b.Property<int?>("VisitId")
+                        .HasColumnType("int");
+
                     b.HasKey("NextOfKinId");
 
+                    b.HasIndex("VisitId");
+
                     b.ToTable("NextOfKin");
+                });
+
+            modelBuilder.Entity("CampSleepaway.Model.Visit", b =>
+                {
+                    b.Property<int?>("VisitId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("VisitId"));
+
+                    b.Property<int?>("CamperId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("VisitId");
+
+                    b.HasIndex("CamperId");
+
+                    b.ToTable("Visit");
                 });
 
             modelBuilder.Entity("CampSleepaway.Model.Cabin", b =>
@@ -183,23 +197,22 @@ namespace CampSleepaway.Migrations
                     b.Navigation("Cabin");
                 });
 
-            modelBuilder.Entity("CampSleepaway.Model.CamperNextOfKin", b =>
+            modelBuilder.Entity("CampSleepaway.Model.NextOfKin", b =>
+                {
+                    b.HasOne("CampSleepaway.Model.Visit", "Visit")
+                        .WithMany("Visitors")
+                        .HasForeignKey("VisitId");
+
+                    b.Navigation("Visit");
+                });
+
+            modelBuilder.Entity("CampSleepaway.Model.Visit", b =>
                 {
                     b.HasOne("CampSleepaway.Model.Camper", "Camper")
-                        .WithMany()
-                        .HasForeignKey("CamperId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CampSleepaway.Model.NextOfKin", "NextOfKin")
-                        .WithMany()
-                        .HasForeignKey("NextOfKinId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Visit")
+                        .HasForeignKey("CamperId");
 
                     b.Navigation("Camper");
-
-                    b.Navigation("NextOfKin");
                 });
 
             modelBuilder.Entity("CampSleepaway.Model.Cabin", b =>
@@ -207,10 +220,20 @@ namespace CampSleepaway.Migrations
                     b.Navigation("Campers");
                 });
 
+            modelBuilder.Entity("CampSleepaway.Model.Camper", b =>
+                {
+                    b.Navigation("Visit");
+                });
+
             modelBuilder.Entity("CampSleepaway.Model.Councelor", b =>
                 {
                     b.Navigation("Cabin")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CampSleepaway.Model.Visit", b =>
+                {
+                    b.Navigation("Visitors");
                 });
 #pragma warning restore 612, 618
         }

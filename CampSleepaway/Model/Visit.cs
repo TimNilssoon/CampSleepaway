@@ -12,10 +12,14 @@ namespace CampSleepaway.Model
     [PrimaryKey(nameof(VisitId))]
     public class Visit
     {
-        public int VisitId { get; set; }
+        public Visit()
+        {
+            Visitors = new();
+        }
+        public int? VisitId { get; set; }
         public List<NextOfKin> Visitors { get; set; }
-        public Camper Camper { get; set; }
-        public int CamperId { get; set; }
+        public Camper? Camper { get; set; }
+        public int? CamperId { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
     }
