@@ -84,6 +84,7 @@ namespace CampSleepaway.Menus.VistorMenus
             context.SaveChanges();
 
             HelperMethods.ShowMessage("Visit scheduled!");
+
         }
 
         private static bool ValidateStartTime(DateTime startTime)
