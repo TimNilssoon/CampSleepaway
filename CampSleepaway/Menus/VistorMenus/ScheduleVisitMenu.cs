@@ -40,7 +40,7 @@ namespace CampSleepaway.Menus.VistorMenus
             DateTime endTime = HelperMethods.GetDateTime("End Time (yyyy-MM-dd HH:mm):");
 
             bool startTimeValid = ValidateStartTime(startTime);
-            bool endTimeValid = ValidateStartTime(endTime);
+            bool endTimeValid = ValidateEndTime(endTime, startTime);
 
             if (!startTimeValid)
             {
