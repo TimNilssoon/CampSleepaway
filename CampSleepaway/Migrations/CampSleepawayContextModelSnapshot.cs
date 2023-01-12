@@ -85,6 +85,21 @@ namespace CampSleepaway.Migrations
                     b.ToTable("Camper");
                 });
 
+            modelBuilder.Entity("CampSleepaway.Model.CamperNextOfKin", b =>
+                {
+                    b.Property<int>("CamperId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NextOfKinId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CamperId", "NextOfKinId");
+
+                    b.HasIndex("NextOfKinId");
+
+                    b.ToTable("CamperNextOfKins");
+                });
+
             modelBuilder.Entity("CampSleepaway.Model.Councelor", b =>
                 {
                     b.Property<int>("CouncelorId")
@@ -192,6 +207,25 @@ namespace CampSleepaway.Migrations
                         .HasForeignKey("CabinId");
 
                     b.Navigation("Cabin");
+                });
+
+            modelBuilder.Entity("CampSleepaway.Model.CamperNextOfKin", b =>
+                {
+                    b.HasOne("CampSleepaway.Model.Camper", "Camper")
+                        .WithMany()
+                        .HasForeignKey("CamperId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CampSleepaway.Model.NextOfKin", "NextOfKin")
+                        .WithMany()
+                        .HasForeignKey("NextOfKinId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Camper");
+
+                    b.Navigation("NextOfKin");
                 });
 
             modelBuilder.Entity("CampSleepaway.Model.NextOfKin", b =>

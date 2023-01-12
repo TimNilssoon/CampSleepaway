@@ -22,7 +22,8 @@ namespace CampSleepaway.Menus
                     "Manage Councelors",
                     "Manage Cabins",
                     "Cabin Reports",
-                    "Councelor Reports"
+                    "Councelor Reports",
+                    "Visitor Information"
                 });
 
                 switch (selection)
@@ -41,6 +42,9 @@ namespace CampSleepaway.Menus
                         break;
                     case 4:
                         CouncelorReportMenu.Menu();
+                        break;
+                    case 5:
+                        VisitorInfoMenu.Menu();
                         break;
                     default:
                         break;

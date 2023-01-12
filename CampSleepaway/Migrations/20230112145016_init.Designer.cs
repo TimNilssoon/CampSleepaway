@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampSleepaway.Migrations
 {
     [DbContext(typeof(CampSleepawayContext))]
-    [Migration("20230112124526_init")]
+    [Migration("20230112145016_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -86,6 +86,21 @@ namespace CampSleepaway.Migrations
                     b.HasIndex("CabinId");
 
                     b.ToTable("Camper");
+                });
+
+            modelBuilder.Entity("CampSleepaway.Model.CamperNextOfKin", b =>
+                {
+                    b.Property<int>("CamperId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NextOfKinId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CamperId", "NextOfKinId");
+
+                    b.HasIndex("NextOfKinId");
+
+                    b.ToTable("CamperNextOfKins");
                 });
 
             modelBuilder.Entity("CampSleepaway.Model.Councelor", b =>
@@ -195,6 +210,25 @@ namespace CampSleepaway.Migrations
                         .HasForeignKey("CabinId");
 
                     b.Navigation("Cabin");
+                });
+
+            modelBuilder.Entity("CampSleepaway.Model.CamperNextOfKin", b =>
+                {
+                    b.HasOne("CampSleepaway.Model.Camper", "Camper")
+                        .WithMany()
+                        .HasForeignKey("CamperId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CampSleepaway.Model.NextOfKin", "NextOfKin")
+                        .WithMany()
+                        .HasForeignKey("NextOfKinId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Camper");
+
+                    b.Navigation("NextOfKin");
                 });
 
             modelBuilder.Entity("CampSleepaway.Model.NextOfKin", b =>

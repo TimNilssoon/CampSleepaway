@@ -114,6 +114,30 @@ namespace CampSleepaway.Migrations
                         principalColumn: "VisitId");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CamperNextOfKins",
+                columns: table => new
+                {
+                    CamperId = table.Column<int>(type: "int", nullable: false),
+                    NextOfKinId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CamperNextOfKins", x => new { x.CamperId, x.NextOfKinId });
+                    table.ForeignKey(
+                        name: "FK_CamperNextOfKins_Camper_CamperId",
+                        column: x => x.CamperId,
+                        principalTable: "Camper",
+                        principalColumn: "CamperId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CamperNextOfKins_NextOfKin_NextOfKinId",
+                        column: x => x.NextOfKinId,
+                        principalTable: "NextOfKin",
+                        principalColumn: "NextOfKinId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Cabin_CouncelorId",
                 table: "Cabin",
@@ -125,6 +149,11 @@ namespace CampSleepaway.Migrations
                 name: "IX_Camper_CabinId",
                 table: "Camper",
                 column: "CabinId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CamperNextOfKins_NextOfKinId",
+                table: "CamperNextOfKins",
+                column: "NextOfKinId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_NextOfKin_VisitId",
@@ -140,6 +169,9 @@ namespace CampSleepaway.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CamperNextOfKins");
+
             migrationBuilder.DropTable(
                 name: "NextOfKin");
 

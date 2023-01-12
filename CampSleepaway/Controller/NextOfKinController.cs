@@ -37,8 +37,8 @@ namespace CampSleepaway.Controller
             {
                 using CampSleepawayContext context = new();
 
-                nextOfKin.Visit = context.CamperNextOfKins.Single(v => v.CamperId == camperId);
                 context.NextOfKins.Add(nextOfKin);
+                context.CamperNextOfKins.Add(new CamperNextOfKin() { CamperId = camperId, NextOfKin = nextOfKin });
                 context.SaveChanges();
 
                 HelperMethods.ShowMessage($"{nextOfKin.FirstName} {nextOfKin.LastName} was created!");
