@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampSleepaway.Migrations
 {
     [DbContext(typeof(CampSleepawayContext))]
-    [Migration("20230111120416_init")]
-    partial class init
+    [Migration("20230112111636_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,9 +145,6 @@ namespace CampSleepaway.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NextOfKinId"));
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -162,9 +159,6 @@ namespace CampSleepaway.Migrations
 
                     b.Property<int>("RelationType")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("NextOfKinId");
 

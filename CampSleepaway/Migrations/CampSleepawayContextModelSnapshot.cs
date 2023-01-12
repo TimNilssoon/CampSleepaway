@@ -142,9 +142,6 @@ namespace CampSleepaway.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NextOfKinId"));
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -159,9 +156,6 @@ namespace CampSleepaway.Migrations
 
                     b.Property<int>("RelationType")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("NextOfKinId");
 
