@@ -60,12 +60,31 @@ namespace CampSleepaway.Menus.VistorMenus
         {
             bool output = false;
 
-            DateTime now = new();
+            DateTime latest = startTime.Date.AddHours(20);
+            DateTime earlyest = startTime.Date.AddHours(10);
 
-            if (startTime > )
+            if (startTime > latest || startTime < earlyest)
             {
-
+                return false;
             }
+
+            return true;
+        }
+
+        private static bool EndTime(DateTime endTime, DateTime startTime)
+        {
+            bool output = false;
+
+            DateTime latest = endTime.Date.AddHours(20);
+            DateTime earlyest = endTime.Date.AddHours(10);
+            DateTime threeHours = startTime.AddHours(3);
+
+            if (endTime > latest || endTime < earlyest || endTime < startTime || endTime > threeHours)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
