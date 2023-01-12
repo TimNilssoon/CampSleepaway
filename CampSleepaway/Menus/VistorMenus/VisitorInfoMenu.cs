@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CampSleepaway.Menus
+namespace CampSleepaway.Menus.VistorMenus
 {
     public class VisitorInfoMenu
     {
@@ -45,7 +45,7 @@ namespace CampSleepaway.Menus
             Console.Clear();
             Console.WriteLine($"You are visiting: {camper.GetFullName()} at {cabin.Name}");
             Console.WriteLine($"Visitors: ");
-            foreach(NextOfKin k in kins)
+            foreach (NextOfKin k in kins)
             {
                 Console.Write($"| {k.GetFullName()} |");
             }
@@ -57,6 +57,6 @@ namespace CampSleepaway.Menus
             Console.WriteLine();
             HelperMethods.ShowMessage();
         }
-        
+
     }
 }

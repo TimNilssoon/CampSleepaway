@@ -1,5 +1,6 @@
 ﻿using CampSleepaway.Menus.CabinMenus;
 using CampSleepaway.Menus.CouncelorMenus;
+using CampSleepaway.Menus.VistorMenus;
 
 namespace CampSleepaway.Menus
 {

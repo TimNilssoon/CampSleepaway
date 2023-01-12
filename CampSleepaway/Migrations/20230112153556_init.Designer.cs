@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampSleepaway.Migrations
 {
     [DbContext(typeof(CampSleepawayContext))]
-    [Migration("20230112145016_init")]
+    [Migration("20230112153556_init")]
     partial class init
     {
         /// <inheritdoc />

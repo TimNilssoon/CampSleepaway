@@ -1,5 +1,6 @@
 ﻿using CampSleepaway.Controller;
 using CampSleepaway.Data;
+using CampSleepaway.Menus.VistorMenus;
 using CampSleepaway.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -71,7 +72,7 @@ namespace CampSleepaway.Menus.CamperMenus
                     NextOfKinMenu.Menu(camper.CamperId);
                     break;
                 case 6:
-
+                    ScheduleVisitMenu.Menu(camper.CamperId);
                     break;
                 default:
                     break;

@@ -15,7 +15,9 @@ namespace CampSleepaway.Controller
         {
             using CampSleepawayContext context = new();
 
-            var nextOfKins = context.NextOfKins.Where(n => n.Visit.CamperId == camper.CamperId).ToList();
+            var camperNextOfKins = context.CamperNextOfKins.Include(n => n.NextOfKin).Where(c => c.CamperId == camper.CamperId).ToList();
+
+            List<NextOfKin> nextOfKins = camperNextOfKins.Select(n => n.NextOfKin).ToList();
 
             return nextOfKins;
         }
