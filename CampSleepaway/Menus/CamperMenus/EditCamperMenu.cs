@@ -1,5 +1,6 @@
 ﻿using CampSleepaway.Controller;
 using CampSleepaway.Data;
+using CampSleepaway.Menus.VistorMenus;
 using CampSleepaway.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -43,7 +44,8 @@ namespace CampSleepaway.Menus.CamperMenus
                 "Update End Date",
                 "Move Camper to another Cabin",
                 "Delete Camper",
-                "Manage next of kin"
+                "Manage next of kin",
+                "Schedule Visit"
             });
 
             switch (selection)
@@ -68,6 +70,9 @@ namespace CampSleepaway.Menus.CamperMenus
                     break;
                 case 5:
                     NextOfKinMenu.Menu(camper.CamperId);
+                    break;
+                case 6:
+                    ScheduleVisitMenu.Menu(camper.CamperId);
                     break;
                 default:
                     break;

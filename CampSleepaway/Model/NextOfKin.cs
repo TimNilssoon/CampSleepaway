@@ -12,6 +12,8 @@ namespace CampSleepaway.Model
     public class NextOfKin : Person
     {
         public int NextOfKinId { get; set; }
+        public int? VisitId { get; set; }
+        public Visit? Visit { get; set; }
         public RelationType RelationType { get; set; }
     }
 }
