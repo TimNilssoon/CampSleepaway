@@ -72,6 +72,7 @@ namespace CampSleepaway
                 // Finally highlight the new selected option.
                 Console.CursorTop = top + selected;
                 Console.BackgroundColor = (ConsoleColor)rnd.Next(1, 14);
+                //Console.Beep();
                 Console.ForegroundColor = ConsoleColor.White;
                 string newOption = options.ElementAt(selected);
                 Console.Write("- " + newOption.PadRight(width));

@@ -25,9 +25,6 @@ namespace CampSleepaway.Menus.VistorMenus
 
             Camper camper = campers[selection];
 
-
-
-
             using CampSleepawayContext context = new();
 
             Visit visit = context.Visits.SingleOrDefault(c => c.CamperId == camper.CamperId);

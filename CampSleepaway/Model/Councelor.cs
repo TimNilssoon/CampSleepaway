@@ -21,7 +21,7 @@ namespace CampSleepaway.Model
                 $"Phone Number: {PhoneNumber}\n" +
                 $"Start Date: {StartDate:yyyy-MM-dd}\n" +
                 $"End Date: {EndDate:yyyy-MM-dd}\n" +
-                $"Date of Birth: {FavoriteNumber}\n" +
+                $"Favorite Number: {FavoriteNumber}\n" +
                 $"Cabin: {cabinName}\n";
 
             return info;

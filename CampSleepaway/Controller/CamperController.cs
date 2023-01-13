@@ -11,7 +11,6 @@ namespace CampSleepaway.Controller
 {
     public class CamperController
     {
-
         public static List<Camper> GetCampers()
         {
             using CampSleepawayContext context = new();
@@ -38,8 +37,8 @@ namespace CampSleepaway.Controller
             camper.LastName = HelperMethods.GetString("Last Name:");
             camper.PhoneNumber = HelperMethods.GetString("Phone Number:");
             camper.DateOfBirth = HelperMethods.GetDateTime("Date of Birth (yyyy-MM-dd):");
-            camper.StartDate = HelperMethods.GetDateTime("Start Date:");
-            camper.EndDate = HelperMethods.GetDateTime("End Date:");
+            camper.StartDate = HelperMethods.GetDateTime("Start Date (yyyy-MM-dd):");
+            camper.EndDate = HelperMethods.GetDateTime("End Date (yyyy-MM-dd):");
 
             string prompt = "Save changes to Db? (true/false)";
             bool save = HelperMethods.GetBool(prompt);
@@ -56,8 +55,6 @@ namespace CampSleepaway.Controller
                 HelperMethods.ShowMessage("Person was not added...");
             }
         }
-
-        
 
         public static void UpdateCamperStartDate(int id, DateTime newStartTime)
         {

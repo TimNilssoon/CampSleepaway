@@ -13,8 +13,6 @@ namespace CampSleepaway
             var dbCouncelor = context.Councelors.FirstOrDefault();
             var dbCabin = context.Cabins.FirstOrDefault();
 
-
-
             if (dbCouncelor is null)
             {
                 SeedDb.SeedCouncelors();

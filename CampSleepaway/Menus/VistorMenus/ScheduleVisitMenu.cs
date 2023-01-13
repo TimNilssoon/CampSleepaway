@@ -89,8 +89,6 @@ namespace CampSleepaway.Menus.VistorMenus
 
         private static bool ValidateStartTime(DateTime startTime)
         {
-            bool output = false;
-
             DateTime latest = startTime.Date.AddHours(20);
             DateTime earlyest = startTime.Date.AddHours(10);
 

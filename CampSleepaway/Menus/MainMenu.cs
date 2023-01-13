@@ -1,6 +1,7 @@
 ﻿using CampSleepaway.Menus.CabinMenus;
 using CampSleepaway.Menus.CouncelorMenus;
 using CampSleepaway.Menus.VistorMenus;
+using System.Net.Security;
 
 namespace CampSleepaway.Menus
 {
@@ -14,7 +15,7 @@ namespace CampSleepaway.Menus
             {
                 Console.Clear();
 
-                Console.WriteLine("Main Menu");
+                Console.WriteLine("Camp Sleepaway");
                 Console.WriteLine("---------");
 
                 int selection = HelperMethods.ShowMenu("What would you like to do?", new string[]
@@ -24,7 +25,8 @@ namespace CampSleepaway.Menus
                     "Manage Cabins",
                     "Cabin Reports",
                     "Councelor Reports",
-                    "Visitor Information"
+                    "Visitor Information",
+                    "Exit"
                 });
 
                 switch (selection)
@@ -47,11 +49,13 @@ namespace CampSleepaway.Menus
                     case 5:
                         VisitorInfoMenu.Menu();
                         break;
+                    case 6:
+                        running = false;
+                        break;
                     default:
                         break;
                 }
             }
-            throw new NotImplementedException();
         }
     }
 }
