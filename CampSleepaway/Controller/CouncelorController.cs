@@ -29,10 +29,9 @@ namespace CampSleepaway.Controller
             councelor.FirstName = HelperMethods.GetString("First Name:");
             councelor.LastName = HelperMethods.GetString("Last Name:");
             councelor.PhoneNumber = HelperMethods.GetString("Phone Number:");
-            councelor.StartDate = HelperMethods.GetDateTime("Start Date:");
-            councelor.EndDate = HelperMethods.GetDateTime("End Date:");
+            councelor.StartDate = HelperMethods.GetDateTime("Start Date (yyyy-MM-dd):");
+            councelor.EndDate = HelperMethods.GetDateTime("End Date (yyyy-MM-dd):");
             councelor.FavoriteNumber = HelperMethods.GetInt("Choose a favorite number:");
-
 
             string prompt = "Save changes to Db? (true/false)";
             bool save = HelperMethods.GetBool(prompt);
