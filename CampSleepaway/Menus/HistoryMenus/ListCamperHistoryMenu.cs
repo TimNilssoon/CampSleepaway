@@ -1,4 +1,5 @@
-﻿using CampSleepaway.Data;
+﻿using CampSleepaway.Controller;
+using CampSleepaway.Data;
 using CampSleepaway.Model;
 using Microsoft.EntityFrameworkCore;
 using ObjectsComparer;
@@ -15,13 +16,15 @@ namespace CampSleepaway.Menus.HistoryMenus
         public static void Menu()
         {
             Console.Clear();
-            using CampSleepawayContext context = new();
-            var campersHistoryDb = context.Campers.TemporalAll();
 
+            var campersHistoryDb = CamperController.GetCampers();
+
+            // Gets all distinct id's from the temporal table
             var allCamperId = (from camper in campersHistoryDb
                                 select camper.CamperId).AsEnumerable()
                         .Distinct().ToList();
 
+            // Creates key value pairs from the distinct id's
             Dictionary<int,string> allCamperIdNames = new();
 
             foreach (var id in allCamperId)
@@ -46,7 +49,6 @@ namespace CampSleepaway.Menus.HistoryMenus
                 .Where(c => c.CamperId == camperId)
                 .ToList();
 
-            DateTime changedOn = EF.Property<DateTime>(camperHistoryDb[0], "PeriodEnd");
             Console.WriteLine($"History of {camperHistoryDb[0].GetFullName()}\n");
 
             // Compares the records and prints what has been updated
@@ -59,7 +61,7 @@ namespace CampSleepaway.Menus.HistoryMenus
 
                 if (diff is not null)
                 {
-                    Console.WriteLine($"The {diff.MemberPath} field was changed from {diff.Value2} to {diff.Value1}");
+                    Console.WriteLine($"- The {diff.MemberPath} field was changed from {diff.Value2} to {diff.Value1}");
                 }
 
                 current = camperHistoryDb[i + 1];

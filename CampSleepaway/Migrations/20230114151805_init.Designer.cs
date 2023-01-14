@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CampSleepaway.Migrations
 {
     [DbContext(typeof(CampSleepawayContext))]
-    [Migration("20230113144842_init")]
+    [Migration("20230114151805_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -40,13 +40,34 @@ namespace CampSleepaway.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("PeriodEnd")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodEnd");
+
+                    b.Property<DateTime>("PeriodStart")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasColumnName("PeriodStart");
+
                     b.HasKey("CabinId");
 
                     b.HasIndex("CouncelorId")
                         .IsUnique()
                         .HasFilter("[CouncelorId] IS NOT NULL");
 
-                    b.ToTable("Cabin");
+                    b.ToTable("Cabin", (string)null);
+
+                    b.ToTable(tb => tb.IsTemporal(ttb =>
+                            {
+                                ttb.UseHistoryTable("CabinHistory");
+                                ttb
+                                    .HasPeriodStart("PeriodStart")
+                                    .HasColumnName("PeriodStart");
+                                ttb
+                                    .HasPeriodEnd("PeriodEnd")
+                                    .HasColumnName("PeriodEnd");
+                            }));
                 });
 
             modelBuilder.Entity("CampSleepaway.Model.Camper", b =>

@@ -34,6 +34,10 @@ namespace CampSleepaway.Data
             modelBuilder
                 .Entity<Councelor>()
                 .ToTable(nameof(Councelor), b => b.IsTemporal());
+
+            modelBuilder
+                .Entity<Cabin>()
+                .ToTable(nameof(Cabin), b => b.IsTemporal());
         }
 
         public DbSet<Camper> Campers { get; set; }

@@ -15,6 +15,7 @@ namespace CampSleepaway.Menus.HistoryMenus
             int selection = HelperMethods.ShowMenu("What would you like to do?", new[]
             {
                 "List camper history",
+                "List next of kin",
                 "List councelor history",
                 "List cabin history"
             });

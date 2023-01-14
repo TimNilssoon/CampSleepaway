@@ -86,9 +86,36 @@ namespace CampSleepaway.Migrations
                 columns: table => new
                 {
                     CabinId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:IsTemporal", true)
+                        .Annotation("SqlServer:TemporalHistoryTableName", "CabinHistory")
+                        .Annotation("SqlServer:TemporalHistoryTableSchema", null)
+                        .Annotation("SqlServer:TemporalPeriodEndColumnName", "PeriodEnd")
+                        .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                        .Annotation("SqlServer:IsTemporal", true)
+                        .Annotation("SqlServer:TemporalHistoryTableName", "CabinHistory")
+                        .Annotation("SqlServer:TemporalHistoryTableSchema", null)
+                        .Annotation("SqlServer:TemporalPeriodEndColumnName", "PeriodEnd")
+                        .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart"),
                     CouncelorId = table.Column<int>(type: "int", nullable: true)
+                        .Annotation("SqlServer:IsTemporal", true)
+                        .Annotation("SqlServer:TemporalHistoryTableName", "CabinHistory")
+                        .Annotation("SqlServer:TemporalHistoryTableSchema", null)
+                        .Annotation("SqlServer:TemporalPeriodEndColumnName", "PeriodEnd")
+                        .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart"),
+                    PeriodEnd = table.Column<DateTime>(type: "datetime2", nullable: false)
+                        .Annotation("SqlServer:IsTemporal", true)
+                        .Annotation("SqlServer:TemporalHistoryTableName", "CabinHistory")
+                        .Annotation("SqlServer:TemporalHistoryTableSchema", null)
+                        .Annotation("SqlServer:TemporalPeriodEndColumnName", "PeriodEnd")
+                        .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart"),
+                    PeriodStart = table.Column<DateTime>(type: "datetime2", nullable: false)
+                        .Annotation("SqlServer:IsTemporal", true)
+                        .Annotation("SqlServer:TemporalHistoryTableName", "CabinHistory")
+                        .Annotation("SqlServer:TemporalHistoryTableSchema", null)
+                        .Annotation("SqlServer:TemporalPeriodEndColumnName", "PeriodEnd")
+                        .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart")
                 },
                 constraints: table =>
                 {
@@ -98,7 +125,12 @@ namespace CampSleepaway.Migrations
                         column: x => x.CouncelorId,
                         principalTable: "Councelor",
                         principalColumn: "CouncelorId");
-                });
+                })
+                .Annotation("SqlServer:IsTemporal", true)
+                .Annotation("SqlServer:TemporalHistoryTableName", "CabinHistory")
+                .Annotation("SqlServer:TemporalHistoryTableSchema", null)
+                .Annotation("SqlServer:TemporalPeriodEndColumnName", "PeriodEnd")
+                .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart");
 
             migrationBuilder.CreateTable(
                 name: "Camper",
@@ -348,7 +380,12 @@ namespace CampSleepaway.Migrations
                 .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart");
 
             migrationBuilder.DropTable(
-                name: "Cabin");
+                name: "Cabin")
+                .Annotation("SqlServer:IsTemporal", true)
+                .Annotation("SqlServer:TemporalHistoryTableName", "CabinHistory")
+                .Annotation("SqlServer:TemporalHistoryTableSchema", null)
+                .Annotation("SqlServer:TemporalPeriodEndColumnName", "PeriodEnd")
+                .Annotation("SqlServer:TemporalPeriodStartColumnName", "PeriodStart");
 
             migrationBuilder.DropTable(
                 name: "Councelor")
