@@ -17,7 +17,7 @@ namespace CampSleepaway.Menus.HistoryMenus
         {
             Console.Clear();
 
-            var campersHistoryDb = CamperController.GetCampers();
+            var campersHistoryDb = CamperController.GetCampersHistory();
 
             // Gets all distinct id's from the temporal table
             var allCamperId = (from camper in campersHistoryDb
