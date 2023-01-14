@@ -100,7 +100,7 @@ namespace CampSleepaway
 
         public static void ShowMessage()
         {
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
         }
 

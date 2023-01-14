@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CampSleepaway.Controller;
-using CampSleepaway.Menus.CamperMenus;
 
-namespace CampSleepaway.Menus
+namespace CampSleepaway.Menus.CamperMenus
 {
     public class CampersMenu
     {

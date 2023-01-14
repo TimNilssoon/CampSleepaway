@@ -1,4 +1,5 @@
 ﻿using CampSleepaway.Menus.CabinMenus;
+using CampSleepaway.Menus.CamperMenus;
 using CampSleepaway.Menus.CouncelorMenus;
 using CampSleepaway.Menus.HistoryMenus;
 using CampSleepaway.Menus.VistorMenus;

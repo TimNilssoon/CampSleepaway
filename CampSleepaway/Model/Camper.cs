@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectsComparer;
 
 namespace CampSleepaway.Model
 {
@@ -32,6 +32,22 @@ namespace CampSleepaway.Model
                 $"Cabin: {cabinName}\n";
 
             return info;
+        }
+
+        public Difference? Compare(Camper toCompare)
+        {
+            var comparer = new ObjectsComparer.Comparer<Camper>();
+
+            IEnumerable<Difference> differences;
+
+            bool isEqual = comparer.Compare(this, toCompare, out differences);
+
+            if (isEqual)
+            {
+                return null;
+            }
+
+            return differences.First();
         }
     }
 }

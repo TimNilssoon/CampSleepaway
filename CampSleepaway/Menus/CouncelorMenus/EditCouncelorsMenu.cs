@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CampSleepaway.Menus
+namespace CampSleepaway.Menus.CouncelorMenus
 {
     public class EditCouncelorsMenu
     {
@@ -34,7 +34,7 @@ namespace CampSleepaway.Menus
             int councelorId = councelor.CouncelorId;
 
             Console.Clear();
-            
+
             string info = councelor.GetInfo();
 
             int selection = HelperMethods.ShowMenu(info, new[]
@@ -59,7 +59,7 @@ namespace CampSleepaway.Menus
                     break;
                 case 2:
                     DateTime newEndDate = PersonController.ProccessEndDate();
-                    CouncelorController.UpdateCouncelorEndDate(councelorId,newEndDate);
+                    CouncelorController.UpdateCouncelorEndDate(councelorId, newEndDate);
                     break;
                 case 3:
                     CouncelorController.UpdateFavoriteNumber(councelorId);
