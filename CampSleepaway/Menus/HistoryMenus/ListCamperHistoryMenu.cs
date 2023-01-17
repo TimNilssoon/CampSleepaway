@@ -44,29 +44,38 @@ namespace CampSleepaway.Menus.HistoryMenus
             using CampSleepawayContext context = new();
 
             // Gets all the history of a camper, orders by descending on the PeriodEnd field
-            var camperHistoryDb = context.Campers.TemporalFromTo(new DateTime(1900, 1, 1).ToUniversalTime(), DateTime.UtcNow)
+            var camperHistoryDb = context.Campers.TemporalAll().Where(c => c.CamperId == camperId)
                 .OrderByDescending(c => EF.Property<DateTime>(c, "PeriodEnd"))
-                .Where(c => c.CamperId == camperId)
+                .Select(c => new
+                {
+                    Camper = c,
+                    PeriodStart = EF.Property<DateTime>(c, "PeriodStart"),
+                    PeriodEnd = EF.Property<DateTime>(c, "PeriodEnd")
+                })
                 .ToList();
 
-            Console.WriteLine($"History of {camperHistoryDb[0].GetFullName()}\n");
+            Console.WriteLine($"History of {camperHistoryDb[0].Camper.GetFullName()}\n");
 
             // Compares the records and prints what has been updated
-            Camper current = camperHistoryDb[0];
+            var current = camperHistoryDb[0].Camper;
 
             for (int i = 0; i < camperHistoryDb.Count - 1; i++)
             {
                 // Gets difference
-                var diff = current.Compare(camperHistoryDb[i + 1]);
+                var diff = current.Compare(camperHistoryDb[i + 1].Camper);
 
                 if (diff is not null)
                 {
-                    Console.WriteLine($"- The {diff.MemberPath} field was changed from {diff.Value2} to {diff.Value1}");
+                    if (camperHistoryDb[i].PeriodEnd.Year != 9999)
+                    {
+                        Console.WriteLine($"{camperHistoryDb[i].PeriodEnd} - The {diff.MemberPath} field was changed from {diff.Value2} to {diff.Value1}");
+                    }
                 }
 
-                current = camperHistoryDb[i + 1];
+                current = camperHistoryDb[i + 1].Camper;
             }
 
+            Console.WriteLine($"{camperHistoryDb[camperHistoryDb.Count - 1].PeriodStart} - The camper was created");
             HelperMethods.ShowMessage();
         }
     }
