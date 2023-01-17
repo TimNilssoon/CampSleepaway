@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CampSleepaway.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,15 @@ namespace CampSleepaway.Menus.HistoryMenus
             {
                 case 0:
                     ListCamperHistoryMenu.Menu();
+                    break;
+                case 1:
+                    ListNextOfKinHistoryMenu.Menu();
+                    break;
+                case 2:
+                    ListCouncelorHistoryMenu.Menu();
+                    break;
+                case 3:
+                    ListCabinHistoryMenu.Menu();
                     break;
                 default:
                     break;

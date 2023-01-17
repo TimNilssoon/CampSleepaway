@@ -22,6 +22,15 @@ namespace CampSleepaway.Controller
             return cabins;
         }
 
+        public static List<Cabin> GetCabinHistory()
+        {
+            using CampSleepawayContext context = new();
+
+            List<Cabin> cabins = context.Cabins.TemporalAll().AsSplitQuery().ToList();
+
+            return cabins;
+        }
+
         public static void UpdateCabinName(int cabinId)
         {
             string newName = HelperMethods.GetString("New Cabin Name:");

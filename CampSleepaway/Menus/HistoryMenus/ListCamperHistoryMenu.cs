@@ -56,23 +56,10 @@ namespace CampSleepaway.Menus.HistoryMenus
 
             Console.WriteLine($"History of {camperHistoryDb[0].Camper.GetFullName()}\n");
 
-            // Compares the records and prints what has been updated
-            var current = camperHistoryDb[0].Camper;
-
-            for (int i = 0; i < camperHistoryDb.Count - 1; i++)
+            foreach (var history in camperHistoryDb)
             {
-                // Gets difference
-                var diff = current.Compare(camperHistoryDb[i + 1].Camper);
-
-                if (diff is not null)
-                {
-                    if (camperHistoryDb[i].PeriodEnd.Year != 9999)
-                    {
-                        Console.WriteLine($"{camperHistoryDb[i].PeriodEnd} - The {diff.MemberPath} field was changed from {diff.Value2} to {diff.Value1}");
-                    }
-                }
-
-                current = camperHistoryDb[i + 1].Camper;
+                Console.WriteLine($"{history.PeriodEnd} - FirstName: {history.Camper.FirstName}| LastName: {history.Camper.LastName}| DateOfBirth: {history.Camper.DateOfBirth}| PhoneNumber: {history.Camper.PhoneNumber}| StartDate: {history.Camper.StartDate}| EndDate: {history.Camper.EndDate}");
+                Console.WriteLine();
             }
 
             Console.WriteLine($"{camperHistoryDb[camperHistoryDb.Count - 1].PeriodStart} - The camper was created");

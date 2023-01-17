@@ -20,6 +20,15 @@ namespace CampSleepaway.Controller
             return councelors;
         }
 
+        public static List<Councelor> GetCouncelorHistory()
+        {
+            using CampSleepawayContext context = new();
+
+            List<Councelor> councelor = context.Councelors.TemporalAll().AsSplitQuery().ToList();
+
+            return councelor;
+        }
+
         public static void AddCouncelor()
         {
             Console.Clear();
