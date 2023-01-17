@@ -33,21 +33,5 @@ namespace CampSleepaway.Model
 
             return info;
         }
-
-        public Difference? Compare(Camper toCompare)
-        {
-            var comparer = new ObjectsComparer.Comparer<Camper>();
-
-            IEnumerable<Difference> differences;
-
-            bool isEqual = comparer.Compare(this, toCompare, out differences);
-
-            if (isEqual)
-            {
-                return null;
-            }
-
-            return differences.First();
-        }
     }
 }
