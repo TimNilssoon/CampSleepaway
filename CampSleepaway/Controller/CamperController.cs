@@ -105,7 +105,10 @@ namespace CampSleepaway.Controller
             if (delete)
             {
                 using CampSleepawayContext context = new();
-                var camperDb = context.Campers.Single(c => c.CamperId == camperId);
+                var camperDb = context.Campers.Include(cabin => cabin.Visit).AsSplitQuery().Single(c => c.CamperId == camperId);
+
+                // Unlinks the visit from the camper
+                camperDb.Visit = null;
 
                 context.Campers.Remove(camperDb);
                 context.SaveChanges();
