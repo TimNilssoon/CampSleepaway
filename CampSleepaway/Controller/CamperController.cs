@@ -20,6 +20,15 @@ namespace CampSleepaway.Controller
             return campers;
         }
 
+        public static List<Camper> GetCampersHistory()
+        {
+            using CampSleepawayContext context = new();
+
+            List<Camper> campers = context.Campers.TemporalAll().AsSplitQuery().ToList();
+
+            return campers;
+        }
+
         public static Camper GetCamperById(int id)
         {
             using CampSleepawayContext context = new();

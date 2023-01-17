@@ -1,12 +1,11 @@
 ﻿using CampSleepaway.Controller;
-using CampSleepaway.Menus.CouncelorMenus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CampSleepaway.Menus
+namespace CampSleepaway.Menus.CouncelorMenus
 {
     public class CouncelorsMenu
     {

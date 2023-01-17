@@ -1,5 +1,7 @@
 ﻿using CampSleepaway.Menus.CabinMenus;
+using CampSleepaway.Menus.CamperMenus;
 using CampSleepaway.Menus.CouncelorMenus;
+using CampSleepaway.Menus.HistoryMenus;
 using CampSleepaway.Menus.VistorMenus;
 using System.Net.Security;
 
@@ -26,6 +28,7 @@ namespace CampSleepaway.Menus
                     "Cabin Reports",
                     "Councelor Reports",
                     "Visitor Information",
+                    "View History",
                     "Exit"
                 });
 
@@ -50,6 +53,9 @@ namespace CampSleepaway.Menus
                         VisitorInfoMenu.Menu();
                         break;
                     case 6:
+                        HistoryMenu.Menu();
+                        break;
+                    case 7:
                         running = false;
                         break;
                     default:

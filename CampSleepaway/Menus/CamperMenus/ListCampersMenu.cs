@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CampSleepaway.Menus
+namespace CampSleepaway.Menus.CamperMenus
 {
     public class ListCampersMenu
     {

@@ -61,7 +61,6 @@ namespace CampSleepaway.Menus.CabinMenus
                 Console.WriteLine();
             }
 
-            Console.WriteLine();
             HelperMethods.ShowMessage();
         }
     }

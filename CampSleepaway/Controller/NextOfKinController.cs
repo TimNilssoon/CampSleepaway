@@ -22,6 +22,15 @@ namespace CampSleepaway.Controller
             return nextOfKins;
         }
 
+        public static List<NextOfKin> GetNextOfKinHistory()
+        {
+            using CampSleepawayContext context = new();
+
+            List<NextOfKin> nextOfKin = context.NextOfKins.TemporalAll().AsSplitQuery().ToList();
+
+            return nextOfKin;
+        }
+
         public static void AddNextOfKin(int camperId)
         {
             Console.Clear();

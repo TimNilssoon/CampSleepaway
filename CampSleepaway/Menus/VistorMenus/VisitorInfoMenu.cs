@@ -51,7 +51,6 @@ namespace CampSleepaway.Menus.VistorMenus
             Console.WriteLine($"Visitation hours: {visit.StartTime} - {visit.EndTime}");
             Console.WriteLine($"Councelor for information: {councelor.GetFullName()}. Phone Number: {councelor.PhoneNumber}");
 
-            Console.WriteLine();
             HelperMethods.ShowMessage();
         }
 

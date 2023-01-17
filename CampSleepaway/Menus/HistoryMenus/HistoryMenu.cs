@@ -1,13 +1,13 @@
-﻿using System;
+﻿using CampSleepaway.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CampSleepaway.Controller;
 
-namespace CampSleepaway.Menus.CamperMenus
+namespace CampSleepaway.Menus.HistoryMenus
 {
-    public class CampersMenu
+    public class HistoryMenu
     {
         public static void Menu()
         {
@@ -15,21 +15,25 @@ namespace CampSleepaway.Menus.CamperMenus
 
             int selection = HelperMethods.ShowMenu("What would you like to do?", new[]
             {
-                "List all campers",
-                "Add Camper",
-                "Edit camper"
+                "List camper history",
+                "List next of kin",
+                "List councelor history",
+                "List cabin history"
             });
 
             switch (selection)
             {
                 case 0:
-                    ListCampersMenu.Menu();
+                    ListCamperHistoryMenu.Menu();
                     break;
                 case 1:
-                    CamperController.AddCamper();
+                    ListNextOfKinHistoryMenu.Menu();
                     break;
                 case 2:
-                    EditCamperMenu.Menu();
+                    ListCouncelorHistoryMenu.Menu();
+                    break;
+                case 3:
+                    ListCabinHistoryMenu.Menu();
                     break;
                 default:
                     break;
