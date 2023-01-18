@@ -47,6 +47,8 @@ namespace CampSleepaway.Data
         public DbSet<NextOfKin> NextOfKins { get; set; }
         public DbSet<Cabin> Cabins { get; set; }
         public DbSet<Visit> Visits { get; set; }
+
+        // CamperNextOfKins is a join table.
         public DbSet<CamperNextOfKin> CamperNextOfKins { get; set; }
     }
 }
