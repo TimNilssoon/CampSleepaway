@@ -18,6 +18,8 @@ namespace CampSleepaway.Menus.VistorMenus
             Console.WriteLine("Visitor Menu");
             Console.WriteLine("------------");
 
+            // Gets all campers to select which camper to visit
+
             List<Camper> campers = CamperController.GetCampers();
             List<string> names = campers.Select(c => c.GetFullName()).ToList();
 
@@ -25,6 +27,8 @@ namespace CampSleepaway.Menus.VistorMenus
 
             Camper camper = campers[selection];
 
+
+            // Checks if there is a visit on the selected camper
             using CampSleepawayContext context = new();
 
             Visit visit = context.Visits.SingleOrDefault(c => c.CamperId == camper.CamperId);
@@ -35,7 +39,9 @@ namespace CampSleepaway.Menus.VistorMenus
                 return;
             }
 
-            List<NextOfKin> kins = NextOfKinController.GetAllNextOfKin(camper);
+
+            // Gets all information about the visit
+            var kins = context.NextOfKins.Where(v => v.VisitId == visit.VisitId).ToList();
             Cabin cabin = context.Cabins.Single(cab => cab.CabinId == camper.CabinId);
             Councelor councelor = context.Councelors.Single(counc => counc.Cabin.CabinId == cabin.CabinId);
 
