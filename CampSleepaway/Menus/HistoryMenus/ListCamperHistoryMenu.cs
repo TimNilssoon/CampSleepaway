@@ -19,12 +19,12 @@ namespace CampSleepaway.Menus.HistoryMenus
 
             var campersHistoryDb = CamperController.GetCampersHistory();
 
-            // Gets all distinct id's from the temporal table
+            // Gets all distinct id's from both the camper table and the history table for camper
             var allCamperId = (from camper in campersHistoryDb
                                 select camper.CamperId).AsEnumerable()
                         .Distinct().ToList();
 
-            // Creates key value pairs from the distinct id's
+            // Creates key value pairs with the id as the key and the camper names as values
             Dictionary<int,string> allCamperIdNames = new();
 
             foreach (var id in allCamperId)
@@ -43,7 +43,7 @@ namespace CampSleepaway.Menus.HistoryMenus
             Console.Clear();
             using CampSleepawayContext context = new();
 
-            // Gets all the history of a camper, orders by descending on the PeriodEnd field
+            // Creates an anonymous object that includes the history of a camper and the PeriodStart and PeriodEnd fields in the db.
             var camperHistoryDb = context.Campers.TemporalAll().Where(c => c.CamperId == camperId)
                 .OrderByDescending(c => EF.Property<DateTime>(c, "PeriodEnd"))
                 .Select(c => new

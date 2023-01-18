@@ -12,12 +12,12 @@ namespace CampSleepaway.Menus.HistoryMenus
 
             var nextOfKinHistoryDb = NextOfKinController.GetNextOfKinHistory();
 
-            // Gets all distinct id's from the temporal table
+            // Gets all distinct id's from both the next of kin table and the history table for next of kin
             var allNextOfKinId = (from nextOfKin in nextOfKinHistoryDb
                                select nextOfKin.NextOfKinId).AsEnumerable()
                         .Distinct().ToList();
 
-            // Creates key value pairs from the distinct id's
+            // Creates key value pairs with the id as the key and the next of kin names as values
             Dictionary<int, string> allNextOfKinIdNames = new();
 
             foreach (var id in allNextOfKinId)
@@ -36,7 +36,7 @@ namespace CampSleepaway.Menus.HistoryMenus
             Console.Clear();
             using CampSleepawayContext context = new();
 
-            // Gets all the history of a camper, orders by descending on the PeriodEnd field
+            // Creates an anonymous object that includes the history of a next of kin and the PeriodStart and PeriodEnd fields in the db.
             var nextOfKinHistoryDb = context.NextOfKins.TemporalAll().Where(n => n.NextOfKinId == nextOfKinId)
                 .OrderByDescending(c => EF.Property<DateTime>(c, "PeriodEnd"))
                 .Select(c => new

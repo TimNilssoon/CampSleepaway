@@ -7,6 +7,7 @@ namespace CampSleepaway
     {
         static void Main(string[] args)
         {
+            // Checks if any db tables are empty, if they are they will be seeded.
             using CampSleepawayContext context = new();
 
             // Check if DB returns any data from our main tables
