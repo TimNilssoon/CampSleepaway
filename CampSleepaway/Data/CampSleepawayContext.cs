@@ -11,6 +11,7 @@ namespace CampSleepaway.Data
 {
     public class CampSleepawayContext : DbContext
     {
+        // Configures an appSettings.json file and specifies that the project is using SQL Server as dbms.
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             IConfigurationRoot config = new ConfigurationBuilder()
@@ -21,6 +22,7 @@ namespace CampSleepaway.Data
             options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
         }
 
+        // Creates temportal tables that adds history functionality.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
