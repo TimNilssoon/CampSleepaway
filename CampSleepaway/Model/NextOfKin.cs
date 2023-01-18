@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CampSleepaway.Model
 {
+    // Sets db table name to the name of this class (singular)
     [Table(nameof(NextOfKin))]
     public class NextOfKin : Person
     {

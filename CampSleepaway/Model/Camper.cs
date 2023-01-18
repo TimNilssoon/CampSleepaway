@@ -7,6 +7,7 @@ using ObjectsComparer;
 
 namespace CampSleepaway.Model
 {
+    // Sets db table name to the name of this class (singular)
     [Table(nameof(Camper))]
     public class Camper : Participant
     {

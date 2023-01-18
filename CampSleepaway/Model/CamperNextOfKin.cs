@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace CampSleepaway.Model
 {
+    // Sets a composite key
     [PrimaryKey(nameof(CamperId), nameof(NextOfKinId))]
     public class CamperNextOfKin
     {

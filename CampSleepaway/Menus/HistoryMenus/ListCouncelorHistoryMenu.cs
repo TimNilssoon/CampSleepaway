@@ -1,11 +1,6 @@
 ﻿using CampSleepaway.Controller;
 using CampSleepaway.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CampSleepaway.Menus.HistoryMenus
 {
@@ -17,12 +12,12 @@ namespace CampSleepaway.Menus.HistoryMenus
 
             var councelorHistoryDb = CouncelorController.GetCouncelorHistory();
 
-            // Gets all distinct id's from the temporal table
+            // Gets all distinct id's from both the councelor table and the history table for councelor
             var allCouncelorId = (from councelor in councelorHistoryDb
                               select councelor.CouncelorId).AsEnumerable()
                         .Distinct().ToList();
 
-            // Creates key value pairs from the distinct id's
+            // Creates key value pairs with the id as the key and the councelor names as values
             Dictionary<int, string> allCouncelorIdNames = new();
 
             foreach (var id in allCouncelorId)
@@ -41,7 +36,7 @@ namespace CampSleepaway.Menus.HistoryMenus
             Console.Clear();
             using CampSleepawayContext context = new();
 
-            // Gets all the history of a cabin, orders by descending on the PeriodEnd field
+            // Creates an anonymous object that includes the history of a councelor and the PeriodStart and PeriodEnd fields in the db.
             var councelorHistoryDb = context.Councelors.TemporalAll().Where(n => n.CouncelorId == councelorId)
                 .OrderByDescending(c => EF.Property<DateTime>(c, "PeriodEnd"))
                 .Select(c => new
