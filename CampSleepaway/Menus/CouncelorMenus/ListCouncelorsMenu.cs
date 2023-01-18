@@ -22,7 +22,7 @@ namespace CampSleepaway.Menus.CouncelorMenus
                 options.Add(councelor.GetFullName());
             }
 
-            int selection = HelperMethods.ShowMenu("Select a camper to display their information", options);
+            int selection = HelperMethods.ShowMenu("Select a councelor to display their information", options);
 
             DisplayCouncelorInfo(councelors[selection]);
         }

@@ -17,6 +17,7 @@ namespace CampSleepaway.Menus
 
             using CampSleepawayContext context = new();
 
+            // Loads in next of kin for the chosen camper
             var camper = context.Campers.Single(c => c.CamperId == camperId);
             List<NextOfKin> nextOfKin = NextOfKinController.GetAllNextOfKin(camper);
 

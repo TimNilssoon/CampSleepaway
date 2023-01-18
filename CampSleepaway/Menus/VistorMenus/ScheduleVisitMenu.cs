@@ -57,6 +57,8 @@ namespace CampSleepaway.Menus.VistorMenus
             visit.StartTime = startTime;
             visit.EndTime = endTime;
 
+            // Ensures that a Camper only has one Visit object associated with it.
+            // A camper cannot have more than 1 Visit at any time
             using CampSleepawayContext context = new();
 
             var visitDb = context.Visits.SingleOrDefault(v => v.CamperId == camperId);

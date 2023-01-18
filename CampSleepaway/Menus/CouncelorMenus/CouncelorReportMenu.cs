@@ -22,7 +22,7 @@ namespace CampSleepaway.Menus.CouncelorMenus
 
             List<string> councelorNames = councelorDb.Select(c => c.GetFullName()).ToList();
 
-            int selection = HelperMethods.ShowMenu("What cabin do you want to check out?", councelorNames);
+            int selection = HelperMethods.ShowMenu("What councelor do you want to check out?", councelorNames);
 
             ReportWindow(councelorDb[selection]);
         }

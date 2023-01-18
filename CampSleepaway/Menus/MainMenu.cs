@@ -20,6 +20,7 @@ namespace CampSleepaway.Menus
                 Console.WriteLine("Camp Sleepaway");
                 Console.WriteLine("---------");
 
+                // Next of kin is managed through the Edit Camper Menu
                 int selection = HelperMethods.ShowMenu("What would you like to do?", new string[]
                 {
                     "Manage Campers",

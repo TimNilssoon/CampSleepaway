@@ -17,6 +17,9 @@ namespace CampSleepaway.Menus.CabinMenus
 
             using CampSleepawayContext context = new();
 
+            // Load all entities into the context.
+            // There wont be large enough amounts of data in these tables to warrant more specific calls.
+            // EF assigns the objects associated with the cabin automatically through naming conventions/navigational properties
             var campersDb = context.Campers.ToArray();
             var cabinsDb = context.Cabins.ToArray();
             var councelorDb = context.Councelors.ToArray();

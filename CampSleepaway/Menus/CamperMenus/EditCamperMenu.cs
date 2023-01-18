@@ -26,6 +26,7 @@ namespace CampSleepaway.Menus.CamperMenus
                 options.Add(camper.GetFullName());
             }
 
+            // Display all campers as an option in a ShowMenu and send the chosen object to the ManageCamperMenu
             int selection = HelperMethods.ShowMenu("Which camper would you like to edit?", options);
 
             ManageCamperMenu(campers[selection]);
@@ -37,6 +38,8 @@ namespace CampSleepaway.Menus.CamperMenus
 
             string info = camper.GetInfo();
 
+            // Update Phone/StartDate/EndDate are properties from parent classes and is handled by the Person Controller
+            // Since these dont correspond directly with a table these methods simply return a chosen value
             int selection = HelperMethods.ShowMenu(info, new[]
             {
                 "Update Phone Number",

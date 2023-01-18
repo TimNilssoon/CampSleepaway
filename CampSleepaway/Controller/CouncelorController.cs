@@ -123,6 +123,7 @@ namespace CampSleepaway.Controller
             }
         }
 
+        // Updates the Councelors Cabin Id and ensures that the previous value gets set to null, if there was one
         public static void UpdateCabin(int councelorId)
         {
             Console.Clear();

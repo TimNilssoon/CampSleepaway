@@ -73,6 +73,7 @@ namespace CampSleepaway.Controller
             }
         }
 
+        // Takes the ID of the chosen camper and loads the related entities so that we can update correctly
         public static void AddCamperToCabin(int camperId)
         {
             Console.WriteLine();

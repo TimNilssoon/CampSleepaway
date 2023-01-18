@@ -27,22 +27,6 @@ namespace CampSleepaway
 
             using CampSleepawayContext context = new();
 
-            var cabinsDb = context.Cabins.ToList();
-
-            int max = 4;
-            int min = 0;
-            for (int i = 0; i < cabinsDb.Count; i++)
-            {
-                cabinsDb[i].Campers = new List<Camper>();
-                for (int j = min; j < max; j++)
-                {
-                    campers[j].Cabin = cabinsDb[i];
-                }
-
-                min = max;
-                max += 4;
-            }
-
             context.AddRange(campers);
             context.SaveChanges();
         }
@@ -74,6 +58,7 @@ namespace CampSleepaway
 
             using (CampSleepawayContext context = new())
             {
+                // Fetch four campers and next of kin and assign them in order
                 var campersDb = context.Campers.Take(4).ToArray();
                 var nextOfKinDb = context.NextOfKins.Take(4).ToArray();
                 for (int i = 0; i < 4; i++)
@@ -87,6 +72,7 @@ namespace CampSleepaway
 
             using (CampSleepawayContext context = new())
             {
+                // Seed visits for the four campers with next of kin
                 var visits = context.Visits.Take(4).ToArray();
                 var nextOfKinDb = context.NextOfKins.Take(4).ToArray();
 
@@ -108,13 +94,13 @@ namespace CampSleepaway
                 var campersDb = context.Campers.ToArray();
 
                 // Something similar to a sliding window search to seed the campers into cabins
-                // Seed a councelor into 
+                // Seed a councelor into cabins and assign 4 campers to each cabin
                 int max = 4;
                 int min = 0;
                 for (int i = 0; i < cabinsDb.Length; i++)
                 {
                     cabinsDb[i].Campers = new List<Camper>();
-                    for(int j = min; j < max; j++)
+                    for (int j = min; j < max; j++)
                     {
                         cabinsDb[i].Campers.Add(campersDb[j]);
                     }
